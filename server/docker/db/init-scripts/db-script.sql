@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS report_log (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
     completed_at TIMESTAMP WITH TIME ZONE
                                          );
-ALTER TABLE report_log ADD COLUMN IF NOT EXISTS metadata JSONB;
+ALTER TABLE report_log ALTER COLUMN parameters TYPE TEXT;
 
 -- Индексы для быстрого поиска отчетов
 CREATE INDEX idx_report_log_user_id ON report_log(user_id);

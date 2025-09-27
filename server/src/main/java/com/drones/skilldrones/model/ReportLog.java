@@ -21,7 +21,7 @@ public class ReportLog {
     private LocalDate reportPeriodStart;
     private LocalDate reportPeriodEnd;
 
-    @Column(columnDefinition = "JSONB")
+    @Column(columnDefinition = "TEXT")
     private String parameters;
 
     @Enumerated(EnumType.STRING)
