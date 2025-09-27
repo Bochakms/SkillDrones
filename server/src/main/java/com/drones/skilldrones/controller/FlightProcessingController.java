@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/processing")
+@RequestMapping("/processing")
 @Tag(name = "Обработка полетов", description = "API для обработки и преобразования данных о полетах БПЛА")
 public class FlightProcessingController {
     private final FileParserService fileParserService;

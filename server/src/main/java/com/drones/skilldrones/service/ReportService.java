@@ -1,5 +1,6 @@
 package com.drones.skilldrones.service;
 
+import com.drones.skilldrones.dto.response.FlightResponse;
 import com.drones.skilldrones.dto.response.ReportResponse;
 
 import java.io.File;
@@ -20,4 +21,5 @@ public interface ReportService {
     List<ReportResponse> getCompletedReports();
     ReportServiceImpl.ReportStatistics getReportStatistics();
     Map<String, Object> generateTopRegionsReport(LocalDate startDate, LocalDate endDate);
+    List<FlightResponse> getFlightsByReportId(Long reportId);
 }

@@ -3,6 +3,8 @@ package com.drones.skilldrones.model;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "report_log")
@@ -32,6 +34,16 @@ public class ReportLog {
 
     public enum ReportStatus {
         PENDING, PROCESSING, COMPLETED, FAILED
+    }
+
+    @OneToMany(mappedBy = "reportLog", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<ReportFlight> reportFlights = new HashSet<>();
+
+    public void addFlight(Flight flight) {
+        ReportFlight reportFlight = new ReportFlight();
+        reportFlight.setReportLog(this);
+        reportFlight.setFlight(flight);
+        this.reportFlights.add(reportFlight);
     }
 
     public ReportLog() {

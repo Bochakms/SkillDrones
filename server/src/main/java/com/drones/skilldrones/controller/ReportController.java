@@ -1,4 +1,5 @@
 package com.drones.skilldrones.controller;
+import com.drones.skilldrones.dto.response.FlightResponse;
 import com.drones.skilldrones.dto.response.ReportResponse;
 import com.drones.skilldrones.service.ReportService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -23,7 +24,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/reports")
+@RequestMapping("/reports")
 @Tag(name = "Отчеты и аналитика", description = "API для генерации отчетов и аналитики по полетам БПЛА")
 public class ReportController {
     private final ReportService reportService;
@@ -262,6 +263,34 @@ public class ReportController {
         } catch (Exception e) {
             return ResponseEntity.badRequest()
                     .body(Map.of("error", "Ошибка получения статистики: " + e.getMessage()));
+        }
+    }
+
+    @Operation(
+            summary = "Полеты отчета",
+            description = "Возвращает список всех полетов, включенных в конкретный отчет"
+    )
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Полеты отчета получены",
+                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = FlightResponse.class)))
+            ),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Отчет не найден"
+            )
+    })
+    @GetMapping("/{reportId}/flights")
+    public ResponseEntity<List<FlightResponse>> getReportFlights(
+            @Parameter(description = "ID отчета", required = true, example = "1")
+            @PathVariable Long reportId) {
+
+        try {
+            List<FlightResponse> flights = reportService.getFlightsByReportId(reportId);
+            return ResponseEntity.ok(flights);
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
         }
     }
 

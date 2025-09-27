@@ -1,20 +1,23 @@
 package com.drones.skilldrones.service;
 
+import com.drones.skilldrones.dto.response.FlightResponse;
 import com.drones.skilldrones.dto.response.ReportResponse;
+import com.drones.skilldrones.mapper.FlightMapper;
+import com.drones.skilldrones.mapper.ReportFlightMapper;
 import com.drones.skilldrones.mapper.ReportMapper;
 import com.drones.skilldrones.model.Flight;
 import com.drones.skilldrones.model.Region;
+import com.drones.skilldrones.model.ReportFlight;
 import com.drones.skilldrones.model.ReportLog;
 import com.drones.skilldrones.repository.FlightRepository;
+import com.drones.skilldrones.repository.ReportFlightRepository;
 import com.drones.skilldrones.repository.ReportLogRepository;
-import com.drones.skilldrones.service.ReportService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -28,16 +31,25 @@ import javax.imageio.ImageIO;
 public class ReportServiceImpl implements ReportService {
     private final FlightRepository flightRepository;
     private final ReportLogRepository reportLogRepository;
+    private final ReportFlightRepository reportFlightRepository;
     private final ReportMapper reportMapper;
+    private final ReportFlightMapper reportFlightMapper;
+    private final FlightMapper flightMapper;
     private final ObjectMapper objectMapper;
 
     public ReportServiceImpl(FlightRepository flightRepository,
                              ReportLogRepository reportLogRepository,
-                             ReportMapper reportMapper) {
+                             ReportFlightRepository reportFlightRepository,
+                             ReportMapper reportMapper,
+                             ReportFlightMapper flightProcessingMapper, FlightMapper flightMapper, // Существующий маппер
+                             ObjectMapper objectMapper) {
         this.flightRepository = flightRepository;
         this.reportLogRepository = reportLogRepository;
+        this.reportFlightRepository = reportFlightRepository;
         this.reportMapper = reportMapper;
-        this.objectMapper = new ObjectMapper();
+        this.reportFlightMapper = flightProcessingMapper;
+        this.flightMapper = flightMapper;
+        this.objectMapper = objectMapper;
     }
 
     @Override
@@ -213,6 +225,17 @@ public class ReportServiceImpl implements ReportService {
     }
 
     @Override
+    public List<FlightResponse> getFlightsByReportId(Long reportId) {
+        List<ReportFlight> reportFlights = reportFlightRepository.findByReportLog_ReportId(reportId);
+
+        List<Flight> flights = reportFlights.stream()
+                .map(ReportFlight::getFlight)
+                .collect(Collectors.toList());
+
+        return flightMapper.toFlightResponseList(flights);
+    }
+
+    @Override
     public Map<String, Object> generateTopRegionsReport(LocalDate startDate, LocalDate endDate) {
         ReportLog reportLog = createReportLog("TOP_REGIONS", startDate, endDate, null);
         Map<String, Object> report = new LinkedHashMap<>();
@@ -346,7 +369,6 @@ public class ReportServiceImpl implements ReportService {
             this.successRate = total > 0 ? (double) completed / total * 100 : 0;
         }
 
-        // Геттеры
         public long getTotalReports() { return totalReports; }
         public long getCompletedReports() { return completedReports; }
         public long getFailedReports() { return failedReports; }

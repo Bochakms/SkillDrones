@@ -5,6 +5,8 @@ import org.locationtech.jts.geom.Point;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "flights")
@@ -15,7 +17,7 @@ public class Flight {
 
     private Integer droneId;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "raw_id")
     private RawTelegram rawTelegram;
 
@@ -40,13 +42,16 @@ public class Flight {
     @Column(columnDefinition = "geometry(Point,4326)")
     private Point arrivalPoint;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "departure_region_id")
     private Region departureRegion;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "arrival_region_id")
     private Region arrivalRegion;
+
+    @OneToMany(mappedBy = "flight", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<ReportFlight> reportFlights = new HashSet<>();
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

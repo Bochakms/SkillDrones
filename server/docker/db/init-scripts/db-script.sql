@@ -46,7 +46,8 @@ CREATE TABLE IF NOT EXISTS report_log (
     error_message TEXT,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
     completed_at TIMESTAMP WITH TIME ZONE
-                                                                                       );
+                                         );
+ALTER TABLE report_log ADD COLUMN IF NOT EXISTS metadata JSONB;
 
 -- Индексы для быстрого поиска отчетов
 CREATE INDEX idx_report_log_user_id ON report_log(user_id);
@@ -93,6 +94,22 @@ CREATE INDEX idx_flights_departure_region ON flights(departure_region_id);
 CREATE INDEX idx_flights_arrival_region ON flights(arrival_region_id);
 CREATE INDEX idx_flights_date ON flights(flight_date);
 CREATE INDEX idx_flights_drone_type ON flights(drone_type);
+
+-- Таблица для связи отчетов и полетов (many-to-many)
+CREATE TABLE IF NOT EXISTS report_flights (
+    report_flight_id BIGSERIAL PRIMARY KEY,
+    report_id BIGINT NOT NULL REFERENCES report_log(report_id) ON DELETE CASCADE,
+    flight_id BIGINT NOT NULL REFERENCES flights(flight_id) ON DELETE CASCADE,
+    included_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+
+    -- Уникальная комбинация отчета и полета
+    UNIQUE(report_id, flight_id)
+    );
+
+-- Индексы для быстрого поиска
+CREATE INDEX idx_report_flights_report_id ON report_flights(report_id);
+CREATE INDEX idx_report_flights_flight_id ON report_flights(flight_id);
+CREATE INDEX idx_report_flights_composite ON report_flights(report_id, flight_id);
 
 -- Таблица для хранения предварительно рассчитанных метрик (оптимизация производительности)
 CREATE TABLE IF NOT EXISTS region_metrics (

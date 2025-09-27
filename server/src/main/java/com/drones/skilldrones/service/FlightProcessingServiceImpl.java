@@ -2,7 +2,7 @@ package com.drones.skilldrones.service;
 
 import com.drones.skilldrones.dto.ParsedFlightData;
 import com.drones.skilldrones.dto.ProcessingStats;
-import com.drones.skilldrones.mapper.FlightProcessingMapper;
+import com.drones.skilldrones.mapper.FlightMapper;
 import com.drones.skilldrones.model.Flight;
 import com.drones.skilldrones.model.RawTelegram;
 import com.drones.skilldrones.model.Region;
@@ -22,12 +22,12 @@ public class FlightProcessingServiceImpl implements FlightProcessingService {
     private final FileParserService fileParserService;
     private final RegionRepository regionRepository;
     private final FlightRepository flightRepository;
-    private final FlightProcessingMapper flightProcessingMapper;
+    private final FlightMapper flightProcessingMapper;
 
     public FlightProcessingServiceImpl(FileParserService fileParserService,
                                        RegionRepository regionRepository,
                                        FlightRepository flightRepository,
-                                       FlightProcessingMapper flightProcessingMapper) {
+                                       FlightMapper flightProcessingMapper) {
         this.fileParserService = fileParserService;
         this.regionRepository = regionRepository;
         this.flightRepository = flightRepository;
@@ -83,6 +83,7 @@ public class FlightProcessingServiceImpl implements FlightProcessingService {
 
         return flight;
     }
+
 
     /**
      * Устанавливает время вылета и прилета
@@ -179,4 +180,5 @@ public class FlightProcessingServiceImpl implements FlightProcessingService {
                 (int) failed
         );
     }
+
 }

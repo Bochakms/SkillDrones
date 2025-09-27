@@ -22,7 +22,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/analysis")
+@RequestMapping("/analysis")
 @Tag(name = "Анализ регионов", description = "API для анализа топ регионов по полетам БПЛА")
 public class RegionAnalysisController {
 

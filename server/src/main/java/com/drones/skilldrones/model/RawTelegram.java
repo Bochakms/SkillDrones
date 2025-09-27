@@ -2,6 +2,8 @@ package com.drones.skilldrones.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "raw_telegrams")
@@ -24,6 +26,9 @@ public class RawTelegram {
     private String fileName;
     private LocalDateTime processedAt;
     private String processingStatus;
+
+    @OneToMany(mappedBy = "rawTelegram", fetch = FetchType.LAZY)
+    private List<Flight> flights = new ArrayList<>();
     
     // ДОБАВЬТЕ ЭТИ СЕТТЕРЫ:
     public void setId(Long id) { this.id = id; }
