@@ -34,4 +34,6 @@ public interface RegionAnalysisService {
     List<RegionResponse> getAllRegions();
 
     Optional<RegionResponse> getRegionById(Long regionId);
+
+    void saveRegions(List<Region> regions);
 }

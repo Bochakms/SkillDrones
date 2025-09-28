@@ -22,6 +22,9 @@ CREATE TABLE IF NOT EXISTS regions (
 
 -- Создание индексов для ускорения пространственных запросов
 CREATE INDEX idx_regions_geometry ON regions USING GIST (geometry);
+ALTER TABLE regions
+    ALTER COLUMN created_at SET DEFAULT CURRENT_TIMESTAMP,
+    ALTER COLUMN updated_at SET DEFAULT CURRENT_TIMESTAMP;
 
 -- Таблица пользователей (операторы, аналитики, администраторы)
 CREATE TABLE IF NOT EXISTS users (
@@ -134,6 +137,7 @@ CREATE TABLE IF NOT EXISTS region_metrics (
 -- Индексы для быстрого доступа к метрикам
 CREATE INDEX idx_region_metrics_composite ON region_metrics(region_id, metric_date, metric_type);
 CREATE UNIQUE INDEX idx_region_metrics_unique ON region_metrics(region_id, metric_date, metric_type);
+
 
 
 

@@ -15,17 +15,16 @@ import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring")
 public interface FlightMapper {
-    // 1. Основной маппинг из ParsedFlightData в Flight (упрощаем)
+    // 1. Основной маппинг из ParsedFlightData в Flight
     @Mapping(source = "flightId", target = "flightCode")
     @Mapping(source = "coordinates", target = "departureCoords")
     @Mapping(source = "coordinates", target = "arrivalCoords")
-    // Временно игнорируем сложные поля, чтобы проверить компиляцию
     @Mapping(target = "departurePoint", ignore = true)
     @Mapping(target = "arrivalPoint", ignore = true)
     @Mapping(target = "departureRegion", ignore = true)
     @Mapping(target = "arrivalRegion", ignore = true)
     @Mapping(target = "durationMinutes", ignore = true)
-    @Mapping(target = "droneId", ignore = true) // Если это поле не заполняется из ParsedFlightData
+    @Mapping(target = "droneId", ignore = true)
     Flight toFlight(ParsedFlightData parsedData);
 
     // 2. Отдельный метод для маппинга Flight в FlightResponse
@@ -87,8 +86,6 @@ public interface FlightMapper {
     default LocalTime extractTime(String timeText) {
         if (timeText == null) return null;
         try {
-            // Парсинг времени из текста телеграммы
-            // Пример: "0705" -> 07:05
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HHmm");
             return LocalTime.parse(timeText, formatter);
         } catch (Exception e) {

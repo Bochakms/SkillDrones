@@ -2,13 +2,13 @@ package com.drones.skilldrones.controller;
 
 import com.drones.skilldrones.dto.ParsedFlightData;
 import com.drones.skilldrones.dto.response.RegionResponse;
+import com.drones.skilldrones.model.Region;
 import com.drones.skilldrones.service.FileParserService;
 import com.drones.skilldrones.service.RegionAnalysisService;
 import com.drones.skilldrones.service.ReportService;
+import com.drones.skilldrones.service.ShapefileService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -17,6 +17,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
@@ -30,12 +33,31 @@ public class RegionAnalysisController {
     private final FileParserService fileParserService;
     private final RegionAnalysisService regionAnalysisService;
     private final ReportService reportService;
+    private final ShapefileService shapefileService;
 
     public RegionAnalysisController(FileParserService fileParserService,
-                                    RegionAnalysisService regionAnalysisService, ReportService reportService) {
+                                    RegionAnalysisService regionAnalysisService, ReportService reportService, ShapefileService shapefileService) {
         this.fileParserService = fileParserService;
         this.regionAnalysisService = regionAnalysisService;
         this.reportService = reportService;
+        this.shapefileService = shapefileService;
+    }
+
+    @Operation(summary = "Загрузка данных регионов из шейп-файла")
+    @PostMapping("/load")
+    public ResponseEntity<String> loadRegions(
+            @RequestParam("shapefile") MultipartFile shapefile,
+            @RequestParam("dbf") MultipartFile dbfFile,
+            @RequestParam("shx") MultipartFile shxFile) {
+
+        try {
+            int processedCount = shapefileService.loadRegionsFromMultipart(shapefile, dbfFile, shxFile);
+            return ResponseEntity.ok("Данные регионов успешно загружены. Обработано: " + processedCount + " регионов");
+
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                    .body("Ошибка при загрузке данных регионов: " + e.getMessage());
+        }
     }
 
     @Operation(summary = "Получить топ регионов из базы данных",

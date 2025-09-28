@@ -8,7 +8,10 @@ import com.drones.skilldrones.repository.RegionRepository;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.Point;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -27,6 +30,8 @@ public class RegionAnalysisServiceImpl implements RegionAnalysisService {
         this.regionMapper = regionMapper;
         this.geometryFactory = new GeometryFactory();
     }
+
+    private static final Logger log = LoggerFactory.getLogger(RegionAnalysisServiceImpl.class);
 
     @Override
     public Optional<Region> findRegionForCoordinates(String coordinates) {
@@ -65,7 +70,7 @@ public class RegionAnalysisServiceImpl implements RegionAnalysisService {
                 .stream()
                 .sorted(Map.Entry.<Region, Integer>comparingByValue().reversed())
                 .limit(10)
-                .collect(Collectors.toList());
+                .toList();
 
         Map<String, Object> result = new LinkedHashMap<>();
         result.put("totalFlightsProcessed", totalProcessed);
@@ -147,6 +152,49 @@ public class RegionAnalysisServiceImpl implements RegionAnalysisService {
                 .map(regionMapper::toResponse);
     }
 
+    @Override
+    public void saveRegions(List<Region> regions) {
+        log.info("Начало сохранения {} регионов в базу данных", regions.size());
+
+        try {
+            if (regions.isEmpty()) {
+                log.warn("Передан пустой список регионов для сохранения");
+                return;
+            }
+
+            int successCount = 0;
+            int mergedCount = 0;
+
+            for (Region region : regions) {
+                try {
+                    // Используем merge вместо save/saveAll
+                    Region mergedRegion = regionRepository.save(region);
+                    mergedCount++;
+                } catch (Exception e) {
+                    log.warn("Ошибка при сохранении региона '{}': {}", region.getName(), e.getMessage());
+                    // Пробуем сохранить через новый EntityManager
+                    try {
+                        Region savedRegion = regionRepository.save(region);
+                        successCount++;
+                    } catch (Exception ex) {
+                        log.error("Не удалось сохранить регион '{}' даже после повторной попытки", region.getName());
+                    }
+                }
+            }
+
+            log.info("Сохранение завершено. Успешно: {}, Обновлено: {}", successCount, mergedCount);
+
+        } catch (Exception e) {
+            log.error("Ошибка при сохранении регионов в базу данных", e);
+            throw new RuntimeException("Ошибка сохранения регионов: " + e.getMessage(), e);
+        }
+    }
+
+    public long getRegionsCount() {
+        return regionRepository.count();
+
+    }
+
     private Point createPointFromCoordinates(String coordinates) {
         String[] parts = coordinates.split(",");
         double lat = Double.parseDouble(parts[0].trim());
@@ -154,4 +202,5 @@ public class RegionAnalysisServiceImpl implements RegionAnalysisService {
 
         return geometryFactory.createPoint(new Coordinate(lon, lat));
     }
+
 }

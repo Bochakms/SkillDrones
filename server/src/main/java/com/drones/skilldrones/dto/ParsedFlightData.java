@@ -10,6 +10,7 @@ public class ParsedFlightData {
         private String coordinates;
         private RawTelegram rawTelegram;
 
+
         // геттеры и сеттеры
         public String getFlightId() { return flightId; }
         public void setFlightId(String flightId) { this.flightId = flightId; }

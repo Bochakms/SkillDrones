@@ -25,6 +25,7 @@ spring:
       hibernate:
         format_sql: ${SPRING_JPA_FORMAT_SQL}
         dialect: org.hibernate.spatial.dialect.postgis.PostgisPG95Dialect
+    open-in-view: false
 
   servlet:
     multipart:

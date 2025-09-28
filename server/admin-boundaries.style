@@ -1,0 +1,25 @@
+# admin-boundaries.style - стиль для импорта административных границ
+node    osm_id     int4    linear
+node    name       text    linear
+node    name:ru    text    linear
+node    place      text    linear
+
+way     osm_id     int4    linear
+way     name       text    linear
+way     name:ru    text    linear
+way     admin_level text   linear
+way     boundary   text    linear
+
+way     admin_level text   polygon
+way     boundary    text   polygon
+way     name        text   polygon
+
+relation osm_id     int4    linear
+relation name       text    linear
+relation name:ru    text    linear
+relation admin_level text   linear
+relation boundary   text    linear
+
+relation admin_level text   polygon
+relation boundary    text   polygon
+relation name        text   polygon
