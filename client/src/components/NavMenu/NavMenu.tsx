@@ -29,6 +29,12 @@ export const NavMenu = () => {
           </NavLink>
         ))}
       </div>
+      <SpriteIcon
+        className={styles.navMenu__logo}
+        name="logo-skilldrones"
+        width={160}
+        height={60}
+      />
       <div className={styles.navMenu__rightWrapper}>
         <div className={styles.navMenu__iconWrapper}>
           <SpriteIcon name="icon-bell" width={32} height={32} />
