@@ -7,6 +7,7 @@ import org.geotools.data.simple.SimpleFeatureIterator;
 import org.geotools.data.simple.SimpleFeatureSource;
 import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.io.WKTReader;
+import org.opengis.feature.simple.SimpleFeature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -91,7 +93,7 @@ public class ShapefileService {
 
                     Region region = new Region();
 
-                    String name = getAttributeValue(feature, "name");
+                    String name = getAttributeValue(feature);
                     region.setName(name);
 
                     Geometry geometry = (Geometry) feature.getDefaultGeometry();
@@ -173,34 +175,61 @@ public class ShapefileService {
         return store;
     }
 
-    private String getAttributeValue(org.opengis.feature.simple.SimpleFeature feature, String attributeName) {
+    private String getAttributeValue(SimpleFeature feature) {
         try {
-            Object value = feature.getAttribute(attributeName);
-            return value != null ? value.toString() : "Unknown";
+            Object value = feature.getAttribute("name");
+            if (value != null) {
+                String stringValue = value.toString();
+
+                // Логируем сырые байты для отладки кодировки
+                byte[] bytes = stringValue.getBytes(StandardCharsets.ISO_8859_1);
+                log.info("Raw bytes for name: {}", Arrays.toString(bytes));
+                log.info("Raw string: '{}'", stringValue);
+
+                if (stringValue.trim().isEmpty()) {
+                    return "Unknown";
+                }
+                return stringValue;
+            }
+            return "Unknown";
         } catch (Exception e) {
+            log.warn("Ошибка получения атрибута 'name': {}", e.getMessage());
             return "Unknown";
         }
     }
 
     private double calculateAreaKm2(Geometry geometry) {
         try {
-            double area = geometry.getArea() * 111 * 111;
-            return Math.round(area * 100) / 100.0;
+            double area = geometry.getArea() * 111.32 * 111.32;
+            return Math.abs(Math.round(area * 100) / 100.0);
         } catch (Exception e) {
             return 0.0;
         }
     }
 
     private Charset detectCharset(String shapefilePath) {
+        Charset[] possibleCharsets = {
+                Charset.forName("Windows-1251"),  // Windows кириллица
+                Charset.forName("CP866"),         // DOS кириллица
+                Charset.forName("KOI8-R"),        // Unix кириллица
+                Charset.forName("ISO-8859-5"),    // Latin/Cyrillic
+                StandardCharsets.UTF_8
+        };
+
+        // Попробуем определить по наличию CPG-файла
         try {
             File cpgFile = new File(shapefilePath.replace(".shp", ".cpg"));
             if (cpgFile.exists()) {
                 String encoding = Files.readString(cpgFile.toPath()).trim();
+                log.info("Используется кодировка из CPG-файла: {}", encoding);
                 return Charset.forName(encoding);
             }
         } catch (Exception e) {
-            // Если CPG-файла нет, используем UTF-8 по умолчанию
+            log.warn("CPG-файл не найден или ошибка чтения");
         }
-        return StandardCharsets.UTF_8;
+
+        // Если CPG нет, используем Windows-1251 как наиболее вероятную
+        log.info("CPG-файл не найден, используется Windows-1251 по умолчанию");
+        return Charset.forName("Windows-1251");
     }
 }

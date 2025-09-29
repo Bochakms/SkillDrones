@@ -2,6 +2,7 @@ package com.drones.skilldrones.service;
 
 import com.drones.skilldrones.dto.ParsedFlightData;
 import com.drones.skilldrones.model.RawTelegram;
+import com.drones.skilldrones.repository.RawTelegramRepository;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 @Service
 public class FileParserServiceImpl implements FileParserService {
+    private final RawTelegramRepository rawTelegramRepository;
+
+    public FileParserServiceImpl(RawTelegramRepository rawTelegramRepository) {
+        this.rawTelegramRepository = rawTelegramRepository;
+    }
+
     @Override
     public List<RawTelegram> parseExcelFile(MultipartFile file) {
         List<RawTelegram> telegrams = new ArrayList<>();
@@ -33,6 +40,7 @@ public class FileParserServiceImpl implements FileParserService {
                 RawTelegram telegram = parseRow(row);
                 if (telegram != null) {
                     telegram.setFileName(file.getOriginalFilename());
+                    rawTelegramRepository.save(telegram);
                     telegrams.add(telegram);
                 }
             }
@@ -212,5 +220,4 @@ public class FileParserServiceImpl implements FileParserService {
         }
         return null;
     }
-
 }

@@ -1,21 +1,21 @@
-2025-09-28T10:34:57.623Z  INFO 1 --- [Drone Analytics Service] [main] c.d.skilldrones.SkilldronesApplication   : Starting SkilldronesApplication v1.0.0 using Java 21.0.8 with PID 1 (/opt/app/app.jar started by root in /opt/app)
-2025-09-28T10:34:57.635Z  INFO 1 --- [Drone Analytics Service] [main] c.d.skilldrones.SkilldronesApplication   : The following 1 profile is active: "dev"
-2025-09-28T10:34:59.515Z  INFO 1 --- [Drone Analytics Service] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-09-28T10:34:59.622Z  INFO 1 --- [Drone Analytics Service] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 91 ms. Found 4 JPA repository interfaces.
-2025-09-28T10:35:00.847Z  INFO 1 --- [Drone Analytics Service] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
-2025-09-28T10:35:00.896Z  INFO 1 --- [Drone Analytics Service] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2025-09-28T10:35:00.897Z  INFO 1 --- [Drone Analytics Service] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.46]
-2025-09-28T10:35:00.940Z  INFO 1 --- [Drone Analytics Service] [main] o.a.c.c.C.[Tomcat].[localhost].[/api]    : Initializing Spring embedded WebApplicationContext
-2025-09-28T10:35:00.941Z  INFO 1 --- [Drone Analytics Service] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3232 ms
-2025-09-28T10:35:01.566Z  INFO 1 --- [Drone Analytics Service] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-09-28T10:35:01.657Z  INFO 1 --- [Drone Analytics Service] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.29.Final
-2025-09-28T10:35:01.675Z  INFO 1 --- [Drone Analytics Service] [main] o.h.spatial.integration.SpatialService   : HHH80000001: hibernate-spatial integration enabled : true
-2025-09-28T10:35:01.717Z  INFO 1 --- [Drone Analytics Service] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-09-28T10:35:01.943Z  INFO 1 --- [Drone Analytics Service] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2025-09-28T10:35:03.016Z  INFO 1 --- [Drone Analytics Service] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@57b63253
-2025-09-28T10:35:03.018Z  INFO 1 --- [Drone Analytics Service] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2025-09-28T10:35:03.068Z  WARN 1 --- [Drone Analytics Service] [main] org.hibernate.orm.deprecation            : HHH90000026: PostgisPG95Dialect has been deprecated; use org.hibernate.dialect.PostgreSQLDialect instead
-2025-09-28T10:35:03.101Z  INFO 1 --- [Drone Analytics Service] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+2025-09-29T19:04:15.114Z  INFO 1 --- [Drone Analytics Service] [main] c.d.skilldrones.SkilldronesApplication   : Starting SkilldronesApplication v1.0.0 using Java 21.0.8 with PID 1 (/opt/app/app.jar started by root in /opt/app)
+2025-09-29T19:04:15.123Z  INFO 1 --- [Drone Analytics Service] [main] c.d.skilldrones.SkilldronesApplication   : The following 1 profile is active: "dev"
+2025-09-29T19:04:16.914Z  INFO 1 --- [Drone Analytics Service] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-29T19:04:17.017Z  INFO 1 --- [Drone Analytics Service] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 88 ms. Found 5 JPA repository interfaces.
+2025-09-29T19:04:17.743Z  INFO 1 --- [Drone Analytics Service] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
+2025-09-29T19:04:17.767Z  INFO 1 --- [Drone Analytics Service] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-09-29T19:04:17.767Z  INFO 1 --- [Drone Analytics Service] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.46]
+2025-09-29T19:04:17.816Z  INFO 1 --- [Drone Analytics Service] [main] o.a.c.c.C.[Tomcat].[localhost].[/api]    : Initializing Spring embedded WebApplicationContext
+2025-09-29T19:04:17.817Z  INFO 1 --- [Drone Analytics Service] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2632 ms
+2025-09-29T19:04:18.249Z  INFO 1 --- [Drone Analytics Service] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-29T19:04:18.332Z  INFO 1 --- [Drone Analytics Service] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.29.Final
+2025-09-29T19:04:18.351Z  INFO 1 --- [Drone Analytics Service] [main] o.h.spatial.integration.SpatialService   : HHH80000001: hibernate-spatial integration enabled : true
+2025-09-29T19:04:18.398Z  INFO 1 --- [Drone Analytics Service] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-09-29T19:04:18.571Z  INFO 1 --- [Drone Analytics Service] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-09-29T19:04:18.852Z  INFO 1 --- [Drone Analytics Service] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@56881196
+2025-09-29T19:04:18.854Z  INFO 1 --- [Drone Analytics Service] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-09-29T19:04:18.900Z  WARN 1 --- [Drone Analytics Service] [main] org.hibernate.orm.deprecation            : HHH90000026: PostgisPG95Dialect has been deprecated; use org.hibernate.dialect.PostgreSQLDialect instead
+2025-09-29T19:04:18.927Z  INFO 1 --- [Drone Analytics Service] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
 	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
 	Database driver: undefined/unknown
 	Database version: 15.4
@@ -23,144 +23,16 @@
 	Isolation level: undefined/unknown
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-2025-09-28T10:35:03.118Z  INFO 1 --- [Drone Analytics Service] [main] org.hibernate.spatial                    : HHH80000003: hibernate-spatial adding type contributions from : org.hibernate.spatial.dialect.postgis.PostgisDialectContributor
-2025-09-28T10:35:03.376Z  INFO 1 --- [Drone Analytics Service] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-09-28T10:35:03.422Z  INFO 1 --- [Drone Analytics Service] [main] org.hibernate.spatial                    : HHH80000003: hibernate-spatial adding type contributions from : org.hibernate.spatial.dialect.postgis.PostgisDialectContributor
-2025-09-28T10:35:03.863Z  INFO 1 --- [Drone Analytics Service] [main] org.hibernate.spatial                    : HHH80000004: hibernate-spatial adding function contributions from : org.hibernate.spatial.dialect.postgis.PostgisDialectContributor
-2025-09-28T10:35:04.654Z  INFO 1 --- [Drone Analytics Service] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-09-28T10:35:05.458Z  INFO 1 --- [Drone Analytics Service] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-09-28T10:35:05.920Z  INFO 1 --- [Drone Analytics Service] [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2025-09-28T10:35:07.778Z  WARN 1 --- [Drone Analytics Service] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-09-28T10:35:08.807Z  INFO 1 --- [Drone Analytics Service] [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
-2025-09-28T10:35:09.019Z  INFO 1 --- [Drone Analytics Service] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8081 (http) with context path '/api'
-2025-09-28T10:35:09.044Z  INFO 1 --- [Drone Analytics Service] [main] c.d.skilldrones.SkilldronesApplication   : Started SkilldronesApplication in 12.415 seconds (process running for 13.457)
-2025-09-28T11:21:50.546Z  INFO 1 --- [Drone Analytics Service] [http-nio-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/api]    : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-09-28T11:21:50.547Z  INFO 1 --- [Drone Analytics Service] [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2025-09-28T11:21:50.548Z  INFO 1 --- [Drone Analytics Service] [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
-2025-09-28T11:21:51.873Z  INFO 1 --- [Drone Analytics Service] [http-nio-8081-exec-10] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 618 ms
-2025-09-28T11:43:34.496Z  WARN 1 --- [Drone Analytics Service] [http-nio-8081-exec-2] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'shapefilePath' for method parameter type String is not present]
-2025-09-28T11:47:59.849Z  WARN 1 --- [Drone Analytics Service] [http-nio-8081-exec-3] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.method.annotation.MethodArgumentConversionNotSupportedException: Failed to convert value of type 'org.springframework.web.multipart.support.StandardMultipartHttpServletRequest$StandardMultipartFile' to required type 'java.lang.String'; Cannot convert value of type 'org.springframework.web.multipart.support.StandardMultipartHttpServletRequest$StandardMultipartFile' to required type 'java.lang.String' for property 'shapefilePath': no matching editors or conversion strategy found]
-2025-09-28T11:48:24.559Z  WARN 1 --- [Drone Analytics Service] [http-nio-8081-exec-7] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'shapefilePath' for method parameter type String is not present]
-2025-09-28T12:09:11.043Z  INFO 1 --- [Drone Analytics Service] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
-2025-09-28T12:09:11.046Z  INFO 1 --- [Drone Analytics Service] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
-2025-09-28T12:09:11.054Z  INFO 1 --- [Drone Analytics Service] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-09-28T12:09:11.057Z  INFO 1 --- [Drone Analytics Service] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2025-09-28T12:09:11.059Z  INFO 1 --- [Drone Analytics Service] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2025-09-28T12:15:53.195Z  INFO 1 --- [Drone Analytics Service] [main] c.d.skilldrones.SkilldronesApplication   : Starting SkilldronesApplication v1.0.0 using Java 21.0.8 with PID 1 (/opt/app/app.jar started by root in /opt/app)
-2025-09-28T12:15:53.199Z  INFO 1 --- [Drone Analytics Service] [main] c.d.skilldrones.SkilldronesApplication   : The following 1 profile is active: "dev"
-2025-09-28T12:15:54.957Z  INFO 1 --- [Drone Analytics Service] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-09-28T12:15:55.060Z  INFO 1 --- [Drone Analytics Service] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 86 ms. Found 4 JPA repository interfaces.
-2025-09-28T12:15:55.778Z  INFO 1 --- [Drone Analytics Service] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
-2025-09-28T12:15:55.800Z  INFO 1 --- [Drone Analytics Service] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2025-09-28T12:15:55.801Z  INFO 1 --- [Drone Analytics Service] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.46]
-2025-09-28T12:15:55.845Z  INFO 1 --- [Drone Analytics Service] [main] o.a.c.c.C.[Tomcat].[localhost].[/api]    : Initializing Spring embedded WebApplicationContext
-2025-09-28T12:15:55.846Z  INFO 1 --- [Drone Analytics Service] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2580 ms
-2025-09-28T12:15:56.265Z  INFO 1 --- [Drone Analytics Service] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-09-28T12:15:56.340Z  INFO 1 --- [Drone Analytics Service] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.29.Final
-2025-09-28T12:15:56.359Z  INFO 1 --- [Drone Analytics Service] [main] o.h.spatial.integration.SpatialService   : HHH80000001: hibernate-spatial integration enabled : true
-2025-09-28T12:15:56.401Z  INFO 1 --- [Drone Analytics Service] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-09-28T12:15:56.576Z  INFO 1 --- [Drone Analytics Service] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2025-09-28T12:15:56.849Z  INFO 1 --- [Drone Analytics Service] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@11f3400c
-2025-09-28T12:15:56.851Z  INFO 1 --- [Drone Analytics Service] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2025-09-28T12:15:56.901Z  WARN 1 --- [Drone Analytics Service] [main] org.hibernate.orm.deprecation            : HHH90000026: PostgisPG95Dialect has been deprecated; use org.hibernate.dialect.PostgreSQLDialect instead
-2025-09-28T12:15:56.928Z  INFO 1 --- [Drone Analytics Service] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
-	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
-	Database driver: undefined/unknown
-	Database version: 15.4
-	Autocommit mode: undefined/unknown
-	Isolation level: undefined/unknown
-	Minimum pool size: undefined/unknown
-	Maximum pool size: undefined/unknown
-2025-09-28T12:15:56.947Z  INFO 1 --- [Drone Analytics Service] [main] org.hibernate.spatial                    : HHH80000003: hibernate-spatial adding type contributions from : org.hibernate.spatial.dialect.postgis.PostgisDialectContributor
-2025-09-28T12:15:57.203Z  INFO 1 --- [Drone Analytics Service] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-09-28T12:15:57.240Z  INFO 1 --- [Drone Analytics Service] [main] org.hibernate.spatial                    : HHH80000003: hibernate-spatial adding type contributions from : org.hibernate.spatial.dialect.postgis.PostgisDialectContributor
-2025-09-28T12:15:57.757Z  INFO 1 --- [Drone Analytics Service] [main] org.hibernate.spatial                    : HHH80000004: hibernate-spatial adding function contributions from : org.hibernate.spatial.dialect.postgis.PostgisDialectContributor
-2025-09-28T12:15:58.678Z  INFO 1 --- [Drone Analytics Service] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-09-28T12:15:59.455Z  INFO 1 --- [Drone Analytics Service] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-09-28T12:16:00.008Z  INFO 1 --- [Drone Analytics Service] [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2025-09-28T12:16:02.946Z  INFO 1 --- [Drone Analytics Service] [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
-2025-09-28T12:16:03.055Z  INFO 1 --- [Drone Analytics Service] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8081 (http) with context path '/api'
-2025-09-28T12:16:03.079Z  INFO 1 --- [Drone Analytics Service] [main] c.d.skilldrones.SkilldronesApplication   : Started SkilldronesApplication in 10.785 seconds (process running for 11.619)
-2025-09-28T12:20:10.313Z  INFO 1 --- [Drone Analytics Service] [http-nio-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/api]    : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-09-28T12:20:10.314Z  INFO 1 --- [Drone Analytics Service] [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2025-09-28T12:20:10.316Z  INFO 1 --- [Drone Analytics Service] [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
-2025-09-28T12:20:10.695Z  WARN 1 --- [Drone Analytics Service] [http-nio-8081-exec-1] org.geotools.data.shapefile.shp          : Could not open the .shx file, continuing assuming the .shp file is not sparse
-
-java.io.IOException: Wrong magic number, expected 9994, got 168430090
-	at org.geotools.data.shapefile.shp.IndexFile.<init>(IndexFile.java:103) ~[gt-shapefile-28.2.jar!/:na]
-	at org.geotools.data.shapefile.shp.ShapefileReader.doInit(ShapefileReader.java:291) ~[gt-shapefile-28.2.jar!/:na]
-	at org.geotools.data.shapefile.shp.ShapefileReader.<init>(ShapefileReader.java:266) ~[gt-shapefile-28.2.jar!/:na]
-	at org.geotools.data.shapefile.ShapefileSetManager.openShapeReader(ShapefileSetManager.java:74) ~[gt-shapefile-28.2.jar!/:na]
-	at org.geotools.data.shapefile.ShapefileFeatureSource.readAttributes(ShapefileFeatureSource.java:496) ~[gt-shapefile-28.2.jar!/:na]
-	at org.geotools.data.shapefile.ShapefileFeatureSource.buildFeatureType(ShapefileFeatureSource.java:454) ~[gt-shapefile-28.2.jar!/:na]
-	at org.geotools.data.shapefile.ShapefileFeatureStore.buildFeatureType(ShapefileFeatureStore.java:142) ~[gt-shapefile-28.2.jar!/:na]
-	at org.geotools.data.store.ContentFeatureSource.getAbsoluteSchema(ContentFeatureSource.java:339) ~[gt-main-28.2.jar!/:na]
-	at org.geotools.data.store.ContentFeatureSource.getSchema(ContentFeatureSource.java:308) ~[gt-main-28.2.jar!/:na]
-	at org.geotools.data.store.ContentFeatureCollection.<init>(ContentFeatureCollection.java:69) ~[gt-main-28.2.jar!/:na]
-	at org.geotools.data.store.ContentFeatureSource.getFeatures(ContentFeatureSource.java:571) ~[gt-main-28.2.jar!/:na]
-	at org.geotools.data.store.ContentFeatureSource.getFeatures(ContentFeatureSource.java:106) ~[gt-main-28.2.jar!/:na]
-	at com.drones.skilldrones.service.ShapefileService.loadShapefile(ShapefileService.java:28) ~[!/:0.0.1-SNAPSHOT]
-	at com.drones.skilldrones.controller.RegionAnalysisController.loadRegions(RegionAnalysisController.java:63) ~[!/:0.0.1-SNAPSHOT]
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(Unknown Source) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Unknown Source) ~[na:na]
-	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258) ~[spring-web-6.2.11.jar!/:6.2.11]
-	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:191) ~[spring-web-6.2.11.jar!/:6.2.11]
-	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.2.11.jar!/:6.2.11]
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:991) ~[spring-webmvc-6.2.11.jar!/:6.2.11]
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:896) ~[spring-webmvc-6.2.11.jar!/:6.2.11]
-	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.2.11.jar!/:6.2.11]
-	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.2.11.jar!/:6.2.11]
-	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.2.11.jar!/:6.2.11]
-	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.2.11.jar!/:6.2.11]
-	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914) ~[spring-webmvc-6.2.11.jar!/:6.2.11]
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590) ~[tomcat-embed-core-10.1.46.jar!/:na]
-	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.2.11.jar!/:6.2.11]
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.46.jar!/:na]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195) ~[tomcat-embed-core-10.1.46.jar!/:na]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.46.jar!/:na]
-	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.46.jar!/:na]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.46.jar!/:na]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.46.jar!/:na]
-	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.2.11.jar!/:6.2.11]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.11.jar!/:6.2.11]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.46.jar!/:na]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.46.jar!/:na]
-	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.2.11.jar!/:6.2.11]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.11.jar!/:6.2.11]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.46.jar!/:na]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.46.jar!/:na]
-	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:110) ~[spring-web-6.2.11.jar!/:6.2.11]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.11.jar!/:6.2.11]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.46.jar!/:na]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.46.jar!/:na]
-	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.2.11.jar!/:6.2.11]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.11.jar!/:6.2.11]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.46.jar!/:na]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.46.jar!/:na]
-	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.46.jar!/:na]
-	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.46.jar!/:na]
-	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483) ~[tomcat-embed-core-10.1.46.jar!/:na]
-	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116) ~[tomcat-embed-core-10.1.46.jar!/:na]
-	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.46.jar!/:na]
-	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.46.jar!/:na]
-	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344) ~[tomcat-embed-core-10.1.46.jar!/:na]
-	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:398) ~[tomcat-embed-core-10.1.46.jar!/:na]
-	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.46.jar!/:na]
-	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903) ~[tomcat-embed-core-10.1.46.jar!/:na]
-	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1776) ~[tomcat-embed-core-10.1.46.jar!/:na]
-	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.46.jar!/:na]
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:975) ~[tomcat-embed-core-10.1.46.jar!/:na]
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:493) ~[tomcat-embed-core-10.1.46.jar!/:na]
-	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.46.jar!/:na]
-	at java.base/java.lang.Thread.run(Unknown Source) ~[na:na]
-Caused by: java.io.IOException: Wrong magic number, expected 9994, got 168430090
-	at org.geotools.data.shapefile.shp.ShapefileHeader.checkMagic(ShapefileHeader.java:60) ~[gt-shapefile-28.2.jar!/:na]
-	at org.geotools.data.shapefile.shp.ShapefileHeader.read(ShapefileHeader.java:80) ~[gt-shapefile-28.2.jar!/:na]
-	at org.geotools.data.shapefile.shp.IndexFile.<init>(IndexFile.java:92) ~[gt-shapefile-28.2.jar!/:na]
-	... 65 common frames omitted
-
-2025-09-28T14:24:27.020Z  INFO 1 --- [Drone Analytics Service] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
-2025-09-28T14:24:27.023Z  INFO 1 --- [Drone Analytics Service] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
-2025-09-28T14:24:27.031Z  INFO 1 --- [Drone Analytics Service] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-09-28T14:24:27.035Z  INFO 1 --- [Drone Analytics Service] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2025-09-28T14:24:27.038Z  INFO 1 --- [Drone Analytics Service] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-09-29T19:04:18.943Z  INFO 1 --- [Drone Analytics Service] [main] org.hibernate.spatial                    : HHH80000003: hibernate-spatial adding type contributions from : org.hibernate.spatial.dialect.postgis.PostgisDialectContributor
+2025-09-29T19:04:19.209Z  INFO 1 --- [Drone Analytics Service] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-29T19:04:19.237Z  INFO 1 --- [Drone Analytics Service] [main] org.hibernate.spatial                    : HHH80000003: hibernate-spatial adding type contributions from : org.hibernate.spatial.dialect.postgis.PostgisDialectContributor
+2025-09-29T19:04:19.733Z  INFO 1 --- [Drone Analytics Service] [main] org.hibernate.spatial                    : HHH80000004: hibernate-spatial adding function contributions from : org.hibernate.spatial.dialect.postgis.PostgisDialectContributor
+2025-09-29T19:04:20.646Z  INFO 1 --- [Drone Analytics Service] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-29T19:04:21.184Z  INFO 1 --- [Drone Analytics Service] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-29T19:04:21.678Z  INFO 1 --- [Drone Analytics Service] [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-09-29T19:04:24.551Z  INFO 1 --- [Drone Analytics Service] [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2025-09-29T19:04:24.745Z  INFO 1 --- [Drone Analytics Service] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8081 (http) with context path '/api'
+2025-09-29T19:04:24.844Z  INFO 1 --- [Drone Analytics Service] [main] c.d.skilldrones.SkilldronesApplication   : Started SkilldronesApplication in 10.737 seconds (process running for 11.621)
+2025-09-29T19:04:54.011Z  INFO 1 --- [Drone Analytics Service] [http-nio-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/api]    : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-29T19:04:54.012Z  INFO 1 --- [Drone Analytics Service] [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-09-29T19:04:54.014Z  INFO 1 --- [Drone Analytics Service] [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms

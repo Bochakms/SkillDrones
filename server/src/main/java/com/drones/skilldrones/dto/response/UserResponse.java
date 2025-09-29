@@ -1,4 +1,4 @@
-package com.dronesskilldrones.dto.response;
+package com.drones.skilldrones.dto.response;
 
 import java.time.LocalDateTime;
 

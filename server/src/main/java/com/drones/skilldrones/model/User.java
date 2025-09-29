@@ -14,13 +14,8 @@ public class User {
     private UserRole role;
 
     private String email;
-    private String passwordHash;
-    private LocalDateTime createdAt;
-    private LocalDateTime lastLogin;
 
     public User() {
-        this.createdAt = LocalDateTime.now();
-        this.lastLogin = LocalDateTime.now();
     }
 
     public enum UserRole {
@@ -51,27 +46,4 @@ public class User {
         this.email = email;
     }
 
-    public String getPasswordHash() {
-        return passwordHash;
-    }
-
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getLastLogin() {
-        return lastLogin;
-    }
-
-    public void setLastLogin(LocalDateTime lastLogin) {
-        this.lastLogin = lastLogin;
-    }
 }

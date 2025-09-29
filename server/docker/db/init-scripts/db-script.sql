@@ -78,6 +78,7 @@ CREATE TABLE IF NOT EXISTS flights (
     -- Координаты
     departure_coords VARCHAR(100),
     arrival_coords VARCHAR(100),
+    processing_status VARCHAR(50),
     departure_point GEOMETRY(Point, 4326),
     arrival_point GEOMETRY(Point, 4326),
 

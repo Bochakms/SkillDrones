@@ -13,25 +13,44 @@ import java.util.Set;
 public class Flight {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "flight_id") // Явно указываем имя столбца
     private Long flightId;
 
+    @Column(name = "drone_id")
     private Integer droneId;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     @JoinColumn(name = "raw_id")
     private RawTelegram rawTelegram;
 
+    @Column(name = "flight_code")
     private String flightCode;
+
+    @Column(name = "drone_type")
     private String droneType;
+
+    @Column(name = "drone_registration")
     private String droneRegistration;
 
+    @Column(name = "flight_date")
     private LocalDate flightDate;
+
+    @Column(name = "departure_time")
     private LocalTime departureTime;
+
+    @Column(name = "arrival_time")
     private LocalTime arrivalTime;
+
+    @Column(name = "duration_minutes")
     private Integer durationMinutes;
 
+    @Column(name = "departure_coords")
     private String departureCoords;
+
+    @Column(name = "arrival_coords")
     private String arrivalCoords;
+
+    @Column(name = "processing_status")
     private String processingStatus;
 
 
@@ -42,11 +61,11 @@ public class Flight {
     @Column(columnDefinition = "geometry(Point,4326)")
     private Point arrivalPoint;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "departure_region_id")
     private Region departureRegion;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "arrival_region_id")
     private Region arrivalRegion;
 
