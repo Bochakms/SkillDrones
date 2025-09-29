@@ -1,0 +1,73 @@
+@use "../../styles/variables" as v;
+@use "../../styles/mixins" as m;
+
+.filters {
+  background: v.$background-secondary;
+  border: 1px solid v.$border;
+  border-radius: v.$border-radius-lg;
+  padding: v.$spacing-lg;
+  margin-bottom: v.$spacing-lg;
+}
+
+.title {
+  margin: 0 0 v.$spacing-md 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: v.$text-primary;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: v.$spacing-md;
+  margin-bottom: v.$spacing-lg;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: v.$spacing-xs;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 500;
+  color: v.$text-primary;
+}
+
+.input,
+.select {
+  padding: 8px 12px;
+  border: 1px solid v.$border;
+  border-radius: v.$border-radius-sm;
+  font-size: 14px;
+  background: v.$background-primary;
+  transition: border-color 0.2s ease;
+
+  &:focus {
+    outline: none;
+    border-color: v.$primary;
+  }
+
+  &:disabled {
+    background-color: v.$background-tertiary;
+    color: v.$text-muted;
+    cursor: not-allowed;
+  }
+}
+
+.actions {
+  display: flex;
+  gap: v.$spacing-sm;
+  flex-wrap: wrap;
+}
+
+.activeFilters {
+  margin-top: v.$spacing-md;
+  padding: v.$spacing-sm;
+  background: lighten(v.$primary, 45%);
+  border: 1px solid lighten(v.$primary, 30%);
+  border-radius: v.$border-radius-sm;
+  font-size: 14px;
+  color: darken(v.$primary, 20%);
+}

@@ -1,0 +1,55 @@
+@use "../../styles/variables" as v;
+@use "../../styles/mixins" as m;
+
+.fetchFlights {
+  max-width: 100%;
+
+  .header {
+    margin-bottom: v.$spacing-lg;
+    flex-wrap: wrap;
+    gap: v.$spacing-sm;
+  }
+
+  .title {
+    margin: 0;
+    color: v.$text-primary;
+    font-size: 24px;
+    font-weight: 600;
+  }
+
+  .timestamp {
+    font-size: 14px;
+    color: v.$text-secondary;
+    margin-top: v.$spacing-xs;
+  }
+
+  .controls {
+    display: flex;
+    gap: v.$spacing-sm;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .error {
+    padding: 12px 16px;
+    background-color: lighten(v.$danger, 45%);
+    color: darken(v.$danger, 20%);
+    border: 1px solid lighten(v.$danger, 30%);
+    border-radius: 4px;
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .stats {
+    margin-top: v.$spacing-md;
+    font-size: 14px;
+    color: v.$text-secondary;
+    text-align: center;
+    padding: v.$spacing-sm;
+    background-color: v.$background-secondary;
+    border-radius: v.$border-radius-sm;
+    border-left: 4px solid v.$primary;
+  }
+}
