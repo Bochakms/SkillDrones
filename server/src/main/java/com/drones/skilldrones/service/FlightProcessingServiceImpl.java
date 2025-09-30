@@ -49,7 +49,7 @@ public class FlightProcessingServiceImpl implements FlightProcessingService {
     }
 
     @Override
-    @Transactional
+//    @Transactional
     public int processBatch(List<RawTelegram> telegrams) {
         int successful = 0;
 
