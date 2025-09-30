@@ -1,0 +1,145 @@
+version: '3.8'
+
+services:
+  postgres:
+    build: ./docker/db
+    container_name: drone_db
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - PGDATA=${PGDATA}
+      - POSTGRES_MULTIPLE_DATABASES=drone_db,keycloak_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      drone-network:
+        ipv4_address: 172.20.0.10
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:23.0.7
+    container_name: drone_keycloak
+    environment:
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://postgres:5432/keycloak_db
+      KC_DB_USERNAME: ${POSTGRES_USER}
+      KC_DB_PASSWORD: ${POSTGRES_PASSWORD}
+      KC_HOSTNAME: localhost
+      KC_HOSTNAME_STRICT: false
+      KC_HTTP_ENABLED: true
+      KC_HEALTH_ENABLED: true
+      KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN}
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
+    command: start-dev
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "8082:8082"
+    volumes:
+      - keycloak_data:/opt/keycloak/data
+    networks:
+      drone-network:
+        ipv4_address: 172.20.0.30
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health/ready"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+  app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: drone_analytics_app
+    ports:
+      - "${SERVER_PORT}:${SERVER_PORT}"
+    environment:
+      # Database Configuration
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:${POSTGRES_PORT}/${POSTGRES_DB}
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
+
+      # Keycloak Configuration
+      KEYCLOAK_SERVER_URL: http://keycloak:8082
+      KEYCLOAK_REALM: master
+      KEYCLOAK_CLIENT_ID: drone-analytics-app
+      KEYCLOAK_CLIENT_SECRET: ${KEYCLOAK_CLIENT_SECRET}
+
+      # Server Configuration
+      SERVER_PORT: ${SERVER_PORT}
+      SERVER_SERVLET_CONTEXT_PATH: ${SERVER_CONTEXT_PATH}
+      SERVER_COMPRESSION_ENABLED: ${SERVER_COMPRESSION_ENABLED}
+
+      # Application Settings
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE}
+      APPLICATION_NAME: ${APPLICATION_NAME}
+      APPLICATION_VERSION: ${APPLICATION_VERSION}
+
+      # JPA & Hibernate
+      SPRING_JPA_SHOW_SQL: ${SPRING_JPA_SHOW_SQL}
+      SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT_SQL: ${SPRING_JPA_FORMAT_SQL}
+      SPRING_JPA_HIBERNATE_DDL_AUTO: ${SPRING_JPA_HIBERNATE_DDL_AUTO}
+
+      # File Upload
+      SPRING_SERVLET_MULTIPART_MAX_FILE_SIZE: ${SPRING_SERVLET_MULTIPART_MAX_FILE_SIZE}
+      SPRING_SERVLET_MULTIPART_MAX_REQUEST_SIZE: ${SPRING_SERVLET_MULTIPART_MAX_REQUEST_SIZE}
+      APP_UPLOAD_TEMP_DIR: ${APP_UPLOAD_TEMP_DIR}
+      APP_UPLOAD_ALLOWED_EXTENSIONS: ${APP_UPLOAD_ALLOWED_EXTENSIONS}
+
+      # Reporting
+      APP_REPORT_IMAGE_WIDTH: ${APP_REPORT_IMAGE_WIDTH}
+      APP_REPORT_IMAGE_HEIGHT: ${APP_REPORT_IMAGE_HEIGHT}
+      APP_REPORT_RETENTION_DAYS: ${APP_REPORT_RETENTION_DAYS}
+
+      # Logging
+      LOGGING_LEVEL_COM_DRONES_SKILLDRONES: ${LOGGING_LEVEL_COM_DRONEAPP}
+      LOGGING_LEVEL_ORG_HIBERNATE: ${LOGGING_LEVEL_ORG_HIBERNATE}
+      LOGGING_FILE_NAME: ${LOGGING_FILE_NAME}
+
+      # Security
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_EXPIRATION: ${JWT_EXPIRATION}
+
+      # External APIs
+      ROSREESTR_API_URL: ${ROSREESTR_API_URL}
+      GIS_LAB_DATA_URL: ${GIS_LAB_DATA_URL}
+
+      # Swagger
+      SPRINGDOC_API_DOCS_PATH: ${API_DOCS_PATH}
+      SPRINGDOC_SWAGGER_UI_PATH: ${SWAGGER_UI_PATH}
+
+    depends_on:
+      postgres:
+        condition: service_healthy
+      keycloak:
+        condition: service_healthy
+    volumes:
+      - ./logs:/opt/app/logs
+      - ./uploads:/opt/app/uploads
+    networks:
+      drone-network:
+        ipv4_address: 172.20.0.20
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  keycloak_data:
+
+networks:
+  drone-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/24
+          gateway: 172.20.0.1

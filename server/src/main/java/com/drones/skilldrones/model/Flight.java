@@ -9,7 +9,20 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "flights")
+@Table(
+        name = "flights",
+        uniqueConstraints = {
+                @UniqueConstraint(
+                        name = "uk_flight_composite_key",
+                        columnNames = {
+                                "departure_time",
+                                "arrival_time",
+                                "departure_coords",
+                                "arrival_coords"
+                        }
+                )
+        }
+)
 public class Flight {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

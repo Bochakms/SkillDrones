@@ -68,16 +68,21 @@ public class FlightProcessingController {
             @RequestParam("file") MultipartFile file) {
 
         try {
+            // 1. Парсим Excel файл
             List<RawTelegram> telegrams = fileParserService.parseExcelFile(file);
 
-            int processedCount = flightProcessingService.processBatch(telegrams);
+            // 2. Обрабатываем телеграммы в полеты
+            int processedFlights = flightProcessingService.processBatch(telegrams);
 
+            // 3. Возвращаем результат с детальной статистикой
             return ResponseEntity.ok(Map.of(
                     "message", "Файл успешно обработан",
                     "totalRecords", telegrams.size(),
-                    "processedSuccessfully", processedCount,
-                    "failed", telegrams.size() - processedCount,
-                    "successRate", String.format("%.2f%%", (double) processedCount / telegrams.size() * 100)
+                    "rawTelegrams", telegrams.size(),
+                    "flightsCreated", processedFlights,
+                    "processedSuccessfully", processedFlights,
+                    "failed", telegrams.size() - processedFlights,
+                    "successRate", String.format("%.2f%%", (double) processedFlights / telegrams.size() * 100)
             ));
 
         } catch (Exception e) {

@@ -49,25 +49,29 @@ public class FlightProcessingServiceImpl implements FlightProcessingService {
     }
 
     @Override
-//    @Transactional
     public int processBatch(List<RawTelegram> telegrams) {
         int successful = 0;
+        System.out.println("Начало обработки " + telegrams.size() + " телеграмм");
 
         for (RawTelegram telegram : telegrams) {
             try {
                 Flight flight = convertToFlight(telegram);
-                flightRepository.save(flight);
+                Flight savedFlight = flightRepository.save(flight);
                 telegram.setProcessingStatus("PROCESSED");
                 successful++;
+                System.out.println("Создан Flight с ID: " + savedFlight.getFlightId());
             } catch (Exception e) {
                 telegram.setProcessingStatus("FAILED");
                 System.err.println("Ошибка обработки телеграммы " + telegram.getId() + ": " + e.getMessage());
+                e.printStackTrace(); // Добавьте для деталей ошибки
             }
         }
 
+        System.out.println("Успешно обработано: " + successful + " из " + telegrams.size());
         return successful;
     }
 
+    @Transactional
     @Override
     public Flight convertToFlight(RawTelegram telegram) {
         // Парсим данные из телеграммы
@@ -84,10 +88,6 @@ public class FlightProcessingServiceImpl implements FlightProcessingService {
         return flight;
     }
 
-
-    /**
-     * Устанавливает время вылета и прилета
-     */
     private void setFlightTimes(Flight flight, ParsedFlightData parsedData, RawTelegram telegram) {
         // Парсим время из телеграммы (если есть соответствующая логика в FileParserService)
         LocalTime departureTime = parseDepartureTime(telegram);
