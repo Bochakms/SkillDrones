@@ -31,7 +31,7 @@ export type RegisterResponse = z.infer<typeof RegisterResponseSchema>;
 export type RegisterErrorResponse = z.infer<typeof RegisterErrorResponseSchema>;
 export type UserProfile = z.infer<typeof UserProfileSchema>;
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://';
+const API_BASE_URL = import.meta.env.API_BASE_URL || 'https://';
 
 const authApi = axios.create({
   baseURL: API_BASE_URL,
