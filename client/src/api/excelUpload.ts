@@ -7,7 +7,8 @@ import {
 } from '../validations/uploadValidations';
 
 // Spring Boot обычно на порту 8080
-const API_BASE_URL = 'http://localhost:8081/api';
+// const API_BASE_URL = 'http://localhost:8081/api';
+const API_BASE_URL = '/api';
 
 export const excelUploadApi = {
   async uploadFile(

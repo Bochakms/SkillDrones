@@ -1,4 +1,3 @@
-// hooks/useExcelUpload.ts
 import { useState, useCallback } from 'react';
 import { type AxiosProgressEvent } from 'axios';
 import { excelUploadApi } from '../api/excelUpload';
@@ -10,7 +9,8 @@ export const useExcelUpload = () => {
     uploadStatus: '',
     isUploading: false,
     isDragOver: false,
-    progress: null
+    progress: null,
+    uploadResponse: null
   });
 
   const validateAndSetFile = useCallback(async (file: File): Promise<boolean> => {
@@ -21,14 +21,16 @@ export const useExcelUpload = () => {
         ...prev,
         selectedFile: file,
         uploadStatus: `Готов к загрузке: ${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)`,
-        progress: null
+        progress: null,
+        uploadResponse: null
       }));
       return true;
     } else {
       setUploadState(prev => ({
         ...prev,
         uploadStatus: `Ошибка: ${validation.errors[0]}`,
-        selectedFile: null
+        selectedFile: null,
+        uploadResponse: null
       }));
       return false;
     }
@@ -67,7 +69,12 @@ export const useExcelUpload = () => {
       return null;
     }
 
-    setUploadState(prev => ({ ...prev, isUploading: true, uploadStatus: 'Подготовка к загрузке...' }));
+    setUploadState(prev => ({ 
+      ...prev, 
+      isUploading: true, 
+      uploadStatus: 'Подготовка к загрузке...',
+      uploadResponse: null 
+    }));
 
     try {
       const onProgress = (progressEvent: AxiosProgressEvent) => {
@@ -93,7 +100,8 @@ export const useExcelUpload = () => {
         uploadStatus: '✅ Файл успешно загружен',
         selectedFile: null,
         isUploading: false,
-        progress: null
+        progress: null,
+        uploadResponse: response
       }));
 
       return response;
@@ -104,7 +112,8 @@ export const useExcelUpload = () => {
         ...prev,
         uploadStatus: `❌ Ошибка загрузки: ${errorMessage}`,
         isUploading: false,
-        progress: null
+        progress: null,
+        uploadResponse: null
       }));
       return null;
     }
@@ -116,7 +125,8 @@ export const useExcelUpload = () => {
       uploadStatus: '',
       isUploading: false,
       isDragOver: false,
-      progress: null
+      progress: null,
+      uploadResponse: null
     });
   }, []);
 
