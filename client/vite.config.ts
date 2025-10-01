@@ -7,4 +7,13 @@ export default defineConfig({
     outDir: 'dist',
   },
   base: './',
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8081',
+        changeOrigin: true,
+        secure: false,
+      }
+    }
+  }
 })

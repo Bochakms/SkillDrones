@@ -20,4 +20,5 @@ export interface UploadState {
   isUploading: boolean;
   isDragOver: boolean;
   progress: UploadProgress | null;
+  uploadResponse: UploadResponse | null;
 }

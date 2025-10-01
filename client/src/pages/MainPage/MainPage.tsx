@@ -1,5 +1,5 @@
 import React from "react";
-import RussiaMap from "../../components/SimpleMap/RussiaMapThemed";
+import RussiaMap from "../../components/SimpleMap/RussiaMap";
 import { useNavigate } from "react-router-dom";
 import FederalDistrictsMap from "../../components/SimpleMap/FederalDistrictsMap";
 import ExcelUploader from "../../components/ExcelUploader/ExcelUploader";

@@ -22,7 +22,7 @@ export const UserProfileSchema = z.object({
   email: z.string().email(),
   name: z.string(),
   surname: z.string(),
-  favorites: z.array(z.string()),
+  reports: z.array(z.string()),
 });
 
 export type LoginResponse = z.infer<typeof LoginResponseSchema>;
