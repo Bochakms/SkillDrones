@@ -3,10 +3,8 @@ package com.drones.skilldrones.controller;
 import com.drones.skilldrones.dto.ParsedFlightData;
 import com.drones.skilldrones.dto.response.RegionResponse;
 import com.drones.skilldrones.model.Region;
-import com.drones.skilldrones.service.FileParserService;
-import com.drones.skilldrones.service.RegionAnalysisService;
-import com.drones.skilldrones.service.ReportService;
-import com.drones.skilldrones.service.ShapefileService;
+import com.drones.skilldrones.repository.RegionRepository;
+import com.drones.skilldrones.service.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -17,9 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
@@ -34,13 +29,17 @@ public class RegionAnalysisController {
     private final RegionAnalysisService regionAnalysisService;
     private final ReportService reportService;
     private final ShapefileService shapefileService;
+    private final GeoJsonService geoJsonService;
+    private final RegionRepository regionRepository;
 
     public RegionAnalysisController(FileParserService fileParserService,
-                                    RegionAnalysisService regionAnalysisService, ReportService reportService, ShapefileService shapefileService) {
+                                    RegionAnalysisService regionAnalysisService, ReportService reportService, ShapefileService shapefileService, GeoJsonService geoJsonService, RegionRepository regionRepository) {
         this.fileParserService = fileParserService;
         this.regionAnalysisService = regionAnalysisService;
         this.reportService = reportService;
         this.shapefileService = shapefileService;
+        this.geoJsonService = geoJsonService;
+        this.regionRepository = regionRepository;
     }
 
     @Operation(summary = "Загрузка данных регионов из шейп-файла")
@@ -130,17 +129,6 @@ public class RegionAnalysisController {
         }
     }
 
-    @Operation(summary = "Получить все регионы", description = "Возвращает список всех регионов")
-    @GetMapping("/regions")
-    public ResponseEntity<List<RegionResponse>> getAllRegions() {
-        try {
-            List<RegionResponse> regions = regionAnalysisService.getAllRegions();
-            return ResponseEntity.ok(regions);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(List.of());
-        }
-    }
-
     @Operation(summary = "Получить регион по ID", description = "Возвращает информацию о регионе по его идентификатору")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Регион найден"),
@@ -159,4 +147,28 @@ public class RegionAnalysisController {
             return ResponseEntity.badRequest().build();
         }
     }
+
+
+
+    @PostMapping("/upload/geojson")
+    public ResponseEntity<String> uploadGeoJson(@RequestParam("file") MultipartFile file) {
+        try {
+            int regionsCount = geoJsonService.loadRegionsFromGeoJson(file);
+            return ResponseEntity.ok("Успешно загружено регионов: " + regionsCount);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Ошибка: " + e.getMessage());
+        }
+    }
+
+    @GetMapping("/regions")
+    @Operation(summary = "Получить все регионы", description = "Возвращает список всех регионов с их данными для анализа")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Успешный запрос, возвращен список регионов"),
+            @ApiResponse(responseCode = "500", description = "Внутренняя ошибка сервера")
+    })
+    public List<Region> getAllRegions() {
+        return regionRepository.findAll();
+    }
 }
+
+

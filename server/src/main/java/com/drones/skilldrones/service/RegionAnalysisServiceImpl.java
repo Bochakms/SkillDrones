@@ -155,37 +155,24 @@ public class RegionAnalysisServiceImpl implements RegionAnalysisService {
     public void saveRegions(List<Region> regions) {
         log.info("Начало сохранения {} регионов в базу данных", regions.size());
 
-        try {
-            if (regions.isEmpty()) {
-                log.warn("Передан пустой список регионов для сохранения");
-                return;
-            }
-
-            int successCount = 0;
-            int mergedCount = 0;
-
-            for (Region region : regions) {
-                try {
-                    // Используем merge вместо save/saveAll
-                    Region mergedRegion = regionRepository.save(region);
-                    mergedCount++;
-                } catch (Exception e) {
-                    log.warn("Ошибка при сохранении региона '{}': {}", region.getName(), e.getMessage());
-                    // Пробуем сохранить через новый EntityManager
-                    try {
-                        Region savedRegion = regionRepository.save(region);
-                        successCount++;
-                    } catch (Exception ex) {
-                        log.error("Не удалось сохранить регион '{}' даже после повторной попытки", region.getName());
-                    }
+        for (Region region : regions) {
+            try {
+                // Для новых регионов используем persist, для существующих - аккуратный merge
+                if (region.getRegionId() == null) {
+                    regionRepository.save(region);
+                } else {
+                    // Для существующих регионов сначала находим entity, затем обновляем поля
+                    Region existingRegion = regionRepository.findById(region.getRegionId())
+                            .orElseThrow(() -> new RuntimeException("Region not found"));
+                    // Копируем только необходимые поля
+                    existingRegion.setName(region.getName());
+                    existingRegion.setAreaKm2(region.getAreaKm2());
+                    existingRegion.setGeometry(region.getGeometry());
+                    regionRepository.save(existingRegion);
                 }
+            } catch (Exception e) {
+                log.error("Ошибка при сохранении региона '{}': {}", region.getName(), e.getMessage());
             }
-
-            log.info("Сохранение завершено. Успешно: {}, Обновлено: {}", successCount, mergedCount);
-
-        } catch (Exception e) {
-            log.error("Ошибка при сохранении регионов в базу данных", e);
-            throw new RuntimeException("Ошибка сохранения регионов: " + e.getMessage(), e);
         }
     }
 

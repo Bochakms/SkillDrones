@@ -8,14 +8,6 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "regions")
-@SQLInsert(sql = """
-    INSERT INTO regions (area_km2, geometry, name) 
-    VALUES (?, ?, ?) 
-    ON CONFLICT (name) DO UPDATE SET 
-        area_km2 = EXCLUDED.area_km2,
-        geometry = EXCLUDED.geometry,
-        updated_at = NOW()
-    """)
 public class Region {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,6 +38,8 @@ public class Region {
         this.name = name;
         this.areaKm2 = areaKm2;
         this.geometry = geometry;
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
     }
 
     // Геттеры и сеттеры

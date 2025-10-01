@@ -13,4 +13,7 @@ public interface RegionRepository extends JpaRepository<Region, Long> {
 
     @Query("SELECT r FROM Region r WHERE within(:point, r.geometry) = true")
     Optional<Region> findRegionByPoint(@Param("point") Point point);
+    @Query(value = "SELECT r.* FROM regions r WHERE ST_Within(:point, r.geometry)", nativeQuery = true)
+    Region findRegionContainingPoint(@Param("point") Point point);
+
 }

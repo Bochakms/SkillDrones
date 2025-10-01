@@ -120,7 +120,7 @@ public class FlightProcessingController {
         }
     }
 
-   @Operation(
+    @Operation(
             summary = "Получить все рейсы",
             description = "Возвращает список всех обработанных рейсов с пагинацией"
     )

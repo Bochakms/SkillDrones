@@ -27,4 +27,7 @@ public interface FileParserService {
      * Новый метод: извлекает время из текста телеграммы
      */
     LocalTime extractTimeFromTelegram(String text, String timeType); // DEPARTURE или ARRIVAL
+
+    void saveParsedDataAsFlight(ParsedFlightData flightData);
+
 }

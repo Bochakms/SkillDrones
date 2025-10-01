@@ -92,6 +92,7 @@ public class Flight {
     public Flight() {
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
+        this.processingStatus = "downloaded";
     }
 
     public Long getFlightId() {

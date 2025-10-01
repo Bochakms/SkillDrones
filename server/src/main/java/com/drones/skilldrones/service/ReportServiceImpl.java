@@ -33,7 +33,6 @@ public class ReportServiceImpl implements ReportService {
     private final ReportLogRepository reportLogRepository;
     private final ReportFlightRepository reportFlightRepository;
     private final ReportMapper reportMapper;
-    private final ReportFlightMapper reportFlightMapper;
     private final FlightMapper flightMapper;
     private final ObjectMapper objectMapper;
 
@@ -47,7 +46,6 @@ public class ReportServiceImpl implements ReportService {
         this.reportLogRepository = reportLogRepository;
         this.reportFlightRepository = reportFlightRepository;
         this.reportMapper = reportMapper;
-        this.reportFlightMapper = flightProcessingMapper;
         this.flightMapper = flightMapper;
         this.objectMapper = objectMapper;
     }

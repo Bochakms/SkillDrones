@@ -15,6 +15,7 @@ public class FlightServiceImpl implements FlightService<Flight> {
 
     private final FlightRepository flightRepository;
 
+
     public FlightServiceImpl (FlightRepository flightRepository) {
         this.flightRepository = flightRepository;
     }

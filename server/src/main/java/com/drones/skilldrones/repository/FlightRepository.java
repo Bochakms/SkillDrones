@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 public interface FlightRepository extends JpaRepository<Flight, Long> {
@@ -43,6 +44,12 @@ public interface FlightRepository extends JpaRepository<Flight, Long> {
 
     @Query("SELECT COUNT(DISTINCT f.droneType) FROM Flight f")
     long countDistinctDroneTypes();
+
+    boolean existsByDepartureTimeAndArrivalTimeAndDepartureCoords(
+            LocalTime departureTime,
+            LocalTime arrivalTime,
+            String departureCoords
+    );
 }
 
 
