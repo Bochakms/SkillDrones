@@ -10,7 +10,8 @@ import {
   FlightSchema
 } from '../validations/flightValidations';
 
-const API_BASE_URL = 'http://localhost:8081/api';
+// const API_BASE_URL = 'http://localhost:8081/api';
+const API_BASE_URL = '/api';
 
 export const flightsApi = {
   // Получение всех полетов с фильтрацией
@@ -34,9 +35,11 @@ export const flightsApi = {
         params.append('regionId', filters.regionId.toString());
       }
 
-      const response = await axios.get(`${API_BASE_URL}/flights?${params}`, {
+      const response = await axios.get(`${API_BASE_URL}/processing/flights?${params}`, {
         timeout: 10000,
       });
+
+      console.log(response)
 
       const validatedResponse = FlightsResponseSchema.parse(response.data);
       
@@ -48,6 +51,8 @@ export const flightsApi = {
 
     } catch (error) {
         console.log(error)
+        console.log("используем моковые данные")
+        
       // Используем мок данные при ошибке с фильтрацией
       const mockFlights = await this.getMockFlights();
       return this.filterMockFlights(mockFlights, filters);
@@ -57,7 +62,7 @@ export const flightsApi = {
   // Получение списка регионов
   async getRegions(): Promise<RegionData[]> {
     try {
-      const response = await axios.get(`${API_BASE_URL}/regions`, {
+      const response = await axios.get(`${API_BASE_URL}/analysis/regions`, {
         timeout: 5000,
       });
 
