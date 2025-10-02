@@ -3,13 +3,9 @@ import React from "react";
 import { Button } from "../Button/Button";
 import type { FlightsFilter } from "../../types/flightTypes";
 import styles from "./Filters.module.scss";
-import type { Region } from "../../types/regionTypes";
 
 interface FiltersProps {
   filters: FlightsFilter;
-  regions: Region[];
-  regionsLoading: boolean;
-  validationErrors: string[];
   onFiltersChange: (filters: FlightsFilter) => void;
   onApplyFilters: () => void;
   onResetFilters: () => void;
@@ -18,9 +14,6 @@ interface FiltersProps {
 
 export const Filters: React.FC<FiltersProps> = ({
   filters,
-  regions,
-  regionsLoading,
-  validationErrors,
   onFiltersChange,
   onApplyFilters,
   onResetFilters,
@@ -33,32 +26,11 @@ export const Filters: React.FC<FiltersProps> = ({
     });
   };
 
-  const handleRegionChange = (regionId: string) => {
-    onFiltersChange({
-      ...filters,
-      regionId: regionId ? parseInt(regionId) : undefined,
-    });
-  };
-
-  const hasActiveFilters = Boolean(
-    filters.startDate || filters.endDate || filters.regionId
-  );
+  const hasActiveFilters = Boolean(filters.startDate || filters.endDate);
 
   return (
     <div className={`${styles.filters} ${className}`}>
-      <h3 className={styles.title}>Фильтры</h3>
-
-      {/* Показ ошибок валидации */}
-      {validationErrors.length > 0 && (
-        <div className={styles.validationErrors}>
-          <strong>Ошибки валидации:</strong>
-          {validationErrors.map((error, index) => (
-            <div key={index} className={styles.validationError}>
-              ❌ {error}
-            </div>
-          ))}
-        </div>
-      )}
+      <h3 className={styles.title}>Фильтры по дате</h3>
 
       <div className={styles.grid}>
         {/* Период дат */}
@@ -83,38 +55,15 @@ export const Filters: React.FC<FiltersProps> = ({
             min={filters.startDate}
           />
         </div>
-
-        {/* Регион */}
-        <div className={styles.field}>
-          <label className={styles.label}>Регион</label>
-          <select
-            value={filters.regionId || ""}
-            onChange={(e) => handleRegionChange(e.target.value)}
-            className={styles.select}
-            disabled={regionsLoading}
-          >
-            <option value="">Все регионы</option>
-            {regions.map((region) => (
-              <option key={region.regionId} value={region.regionId}>
-                {region.name}
-              </option>
-            ))}
-          </select>
-        </div>
       </div>
 
       <div className={styles.actions}>
-        <Button
-          variant="primary"
-          onClick={onApplyFilters}
-          icon="🔍"
-          isDisabled={validationErrors.length > 0}
-        >
+        <Button variant="primary" onClick={onApplyFilters}>
           Применить фильтры
         </Button>
 
         {hasActiveFilters && (
-          <Button variant="secondary" onClick={onResetFilters} icon="🗑️">
+          <Button variant="secondary" onClick={onResetFilters}>
             Сбросить
           </Button>
         )}
@@ -125,10 +74,6 @@ export const Filters: React.FC<FiltersProps> = ({
           <strong>Активные фильтры:</strong>
           {filters.startDate && ` С ${filters.startDate}`}
           {filters.endDate && ` По ${filters.endDate}`}
-          {filters.regionId &&
-            ` Регион: ${
-              regions.find((r) => r.regionId === filters.regionId)?.name
-            }`}
         </div>
       )}
     </div>

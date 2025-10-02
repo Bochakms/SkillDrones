@@ -205,6 +205,7 @@ const FederalDistrictsMap: React.FC = () => {
 
       // Настраиваем внешний вид без границ между регионами
       polygonSeries.mapPolygons.template.setAll({
+        fill: am5.color("#67b7dc"),
         fillOpacity: 0.8,
         stroke: am5.color("#ffffff"),
         strokeWidth: 2,
@@ -233,7 +234,12 @@ const FederalDistrictsMap: React.FC = () => {
     };
   }, []);
 
-  return <div ref={chartRef} style={{ width: "100%", height: "600px" }} />;
+  return (
+    <div
+      ref={chartRef}
+      style={{ width: "100%", height: "600px", backgroundColor: "#f0f2f5" }}
+    />
+  );
 };
 
 export default FederalDistrictsMap;

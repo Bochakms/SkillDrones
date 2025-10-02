@@ -1,0 +1,91 @@
+@use "../../styles/variables" as v;
+@use "../../styles/mixins" as m;
+
+.table {
+  width: 100%;
+
+  .header {
+    margin-bottom: v.$spacing-md;
+    font-size: 18px;
+    font-weight: 600;
+    color: v.$text-primary;
+  }
+
+  .container {
+    overflow-x: auto;
+    border: 1px solid v.$border;
+    border-radius: v.$border-radius-lg;
+    background-color: v.$background-primary;
+    box-shadow: v.$shadow-sm;
+  }
+
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 1200px;
+
+    th,
+    td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid v.$border-light;
+    }
+
+    th {
+      background-color: v.$background-secondary;
+      font-weight: 600;
+      color: v.$text-primary;
+      border-bottom: 2px solid v.$border;
+      position: sticky;
+      top: 0;
+    }
+
+    tr {
+      transition: background-color 0.2s ease;
+
+      &:nth-child(even) {
+        background-color: v.$background-secondary;
+      }
+
+      &:hover {
+        background-color: lighten(v.$primary, 45%);
+      }
+
+      &:last-child {
+        td {
+          border-bottom: none;
+        }
+      }
+    }
+
+    td {
+      color: v.$text-primary;
+
+      &.highlight {
+        font-weight: 500;
+        color: v.$primary;
+      }
+    }
+  }
+
+  .footer {
+    margin-top: v.$spacing-sm;
+    font-size: 14px;
+    color: v.$text-secondary;
+    text-align: right;
+  }
+}
+
+.loading {
+  padding: 40px;
+  text-align: center;
+  color: v.$text-secondary;
+  font-size: 16px;
+}
+
+.empty {
+  padding: 40px;
+  text-align: center;
+  color: v.$text-secondary;
+  font-size: 16px;
+}

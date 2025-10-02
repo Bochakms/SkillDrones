@@ -21,7 +21,7 @@ function AppRouter() {
         />
       ))}
 
-      <Route path="/region/:regionId" element={<RegionPage />} />
+      <Route path="/region/:regionName" element={<RegionPage />} />
 
       {/* Реддирект с корневого пути */}
       <Route path="/" element={<Navigate to="/" replace />} />

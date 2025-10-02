@@ -2,21 +2,22 @@
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import RegionMap from "../../components/SimpleMap/RegionMap";
+import FetchFlightsData from "../../components/FetchFlightsData/FetchFlightsData";
 
 const RegionPage: React.FC = () => {
-  const { regionId } = useParams<{ regionId: string }>();
+  const { regionName } = useParams<{ regionName: string }>();
   const navigate = useNavigate();
 
-  if (!regionId) {
+  if (!regionName) {
     return <div>Регион не указан</div>;
   }
 
   const handleBackClick = () => {
-    navigate(-1); // Возврат назад или navigate('/') для возврата на главную
+    navigate(-1);
   };
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div style={{ margin: "20px 0" }}>
       <button
         onClick={handleBackClick}
         style={{
@@ -29,20 +30,20 @@ const RegionPage: React.FC = () => {
           cursor: "pointer",
         }}
       >
-        ← Назад к карте России
+        Назад
       </button>
 
-      <h1>Регион: {regionId}</h1>
+      <h1>Регион: {regionName}</h1>
 
       <div style={{ marginTop: "30px" }}>
-        <RegionMap regionId={regionId} width="100%" height="600px" />
+        <RegionMap regionName={regionName} width="100%" height="600px" />
       </div>
 
       {/* Дополнительная информация о регионе */}
       <div style={{ marginTop: "30px" }}>
         <h2>Информация о регионе</h2>
-        <p>Здесь может быть дополнительная информация о регионе {regionId}</p>
-        {/* Можно добавить статистику, данные и т.д. */}
+
+        <FetchFlightsData regionName={regionName} />
       </div>
     </div>
   );

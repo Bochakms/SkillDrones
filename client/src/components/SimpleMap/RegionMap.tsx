@@ -2,21 +2,21 @@
 import React, { useEffect, useRef } from "react";
 import * as am5 from "@amcharts/amcharts5";
 import * as am5map from "@amcharts/amcharts5/map";
-import am5geodata_russiaLow from "@amcharts/amcharts5-geodata/russiaLow";
-import am5geodata_russiaCrimeaLow from "@amcharts/amcharts5-geodata/russiaCrimeaLow";
+import am5geodata_russiaLow from "@amcharts/amcharts5-geodata/russiaHigh";
+import am5geodata_russiaCrimeaLow from "@amcharts/amcharts5-geodata/russiaCrimeaHigh";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 import type { FeatureCollection, Feature } from "geojson";
 import * as d3geo from "d3-geo";
 import am5geodata_lang_RU from "@amcharts/amcharts5-geodata/lang/RU";
 
 interface RegionMapProps {
-  regionId: string;
+  regionName: string;
   width?: string;
   height?: string;
 }
 
 const RegionMap: React.FC<RegionMapProps> = ({
-  regionId,
+  regionName,
   width = "100%",
   height = "600px",
 }) => {
@@ -29,7 +29,7 @@ const RegionMap: React.FC<RegionMapProps> = ({
     root.setThemes([am5themes_Animated.new(root)]);
 
     // Функция для поиска региона по ID
-    const findRegionById = (regionId: string): Feature | null => {
+    const findRegionById = (regionName: string): Feature | null => {
       const combinedGeoJSON: FeatureCollection = {
         type: "FeatureCollection",
         features: [
@@ -41,20 +41,17 @@ const RegionMap: React.FC<RegionMapProps> = ({
       // Ищем регион по разным возможным полям
       const region = combinedGeoJSON.features.find((feature: Feature) => {
         return (
-          feature.properties?.id === regionId ||
-          feature.id === regionId ||
-          feature.properties?.iso === regionId ||
-          feature.properties?.name?.toLowerCase() === regionId.toLowerCase()
+          feature.properties?.name?.toLowerCase() === regionName.toLowerCase()
         );
       });
 
       return region || null;
     };
 
-    const regionFeature = findRegionById(regionId);
+    const regionFeature = findRegionById(regionName);
 
     if (!regionFeature) {
-      console.error(`Регион с ID ${regionId} не найден`);
+      console.error(`Регион с ID ${regionName} не найден`);
       return;
     }
 
@@ -105,7 +102,7 @@ const RegionMap: React.FC<RegionMapProps> = ({
     return () => {
       root.dispose();
     };
-  }, [regionId]);
+  }, [regionName]);
 
   return (
     <div

@@ -8,11 +8,13 @@ import type { FlightsFilter } from "../../types/flightTypes";
 import styles from "./FetchFlightsData.module.scss";
 
 interface FetchFlightsDataProps {
+  regionName?: string;
   autoLoad?: boolean;
   className?: string;
 }
 
 const FetchFlightsData: React.FC<FetchFlightsDataProps> = ({
+  regionName,
   autoLoad = true,
   className = "",
 }) => {
@@ -21,48 +23,55 @@ const FetchFlightsData: React.FC<FetchFlightsDataProps> = ({
     loading,
     error,
     lastUpdated,
-    regions,
-    regionsLoading,
-    validationErrors,
     fetchFlights,
-    fetchRegions,
     clearError,
     clearFlights,
   } = useFlights();
 
   const [filters, setFilters] = useState<FlightsFilter>({});
 
-  // Загружаем регионы при монтировании
-  useEffect(() => {
-    fetchRegions();
-  }, [fetchRegions]);
-
-  // Автозагрузка данных
   useEffect(() => {
     if (autoLoad) {
-      fetchFlights(filters);
+      const filtersWithRegion = regionName
+        ? { ...filters, regionName }
+        : filters;
+
+      fetchFlights(filtersWithRegion);
     }
-  }, [autoLoad, fetchFlights]);
+  }, [autoLoad, fetchFlights, regionName, filters]);
 
   const handleApplyFilters = () => {
-    fetchFlights(filters);
+    const filtersWithRegion = regionName ? { ...filters, regionName } : filters;
+
+    fetchFlights(filtersWithRegion);
   };
 
   const handleResetFilters = () => {
     const resetFilters: FlightsFilter = {};
     setFilters(resetFilters);
-    fetchFlights(resetFilters);
+
+    const filtersWithRegion = regionName
+      ? { ...resetFilters, regionName }
+      : resetFilters;
+
+    fetchFlights(filtersWithRegion);
   };
 
   const handleReload = () => {
-    fetchFlights(filters);
+    const filtersWithRegion = regionName ? { ...filters, regionName } : filters;
+
+    fetchFlights(filtersWithRegion);
   };
 
   return (
     <div className={`${styles.fetchFlights} ${className}`}>
       <div className={styles.header}>
         <div>
-          <h2 className={styles.title}>Данные о полетах</h2>
+          <h2 className={styles.title}>
+            {regionName
+              ? `Данные о полетах - ${regionName}`
+              : "Данные о полетах"}
+          </h2>
           {lastUpdated && (
             <div className={styles.timestamp}>
               Обновлено: {lastUpdated.toLocaleTimeString("ru-RU")}
@@ -76,23 +85,18 @@ const FetchFlightsData: React.FC<FetchFlightsDataProps> = ({
             onClick={handleReload}
             isDisabled={loading}
             isLoading={loading}
-            icon="🔄"
           >
             Обновить
           </Button>
 
-          <Button variant="secondary" onClick={clearFlights} icon="❌">
+          <Button variant="secondary" onClick={clearFlights}>
             Очистить
           </Button>
         </div>
       </div>
 
-      {/* Компонент фильтров */}
       <Filters
         filters={filters}
-        regions={regions}
-        regionsLoading={regionsLoading}
-        validationErrors={validationErrors}
         onFiltersChange={setFilters}
         onApplyFilters={handleApplyFilters}
         onResetFilters={handleResetFilters}
@@ -121,10 +125,7 @@ const FetchFlightsData: React.FC<FetchFlightsDataProps> = ({
       {flights.length > 0 && !loading && (
         <div className={styles.stats}>
           Показано {flights.length} полетов
-          {filters.regionId &&
-            ` для региона: ${
-              regions.find((r) => r.regionId === filters.regionId)?.name
-            }`}
+          {regionName && ` для региона: ${regionName}`}
           {filters.startDate && ` с ${filters.startDate}`}
           {filters.endDate && ` по ${filters.endDate}`}
         </div>

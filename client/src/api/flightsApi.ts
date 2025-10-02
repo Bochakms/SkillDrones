@@ -4,12 +4,9 @@ import {
   FlightsResponseSchema,
   FlightsFilterSchema,
   type FlightData,
-  type FlightsFilterData,
-  FlightSchema
+  type FlightsFilterData
 } from '../validations/flightValidations';
-import { RegionsResponseSchema, type RegionData } from '../validations/regionValidations';
 
-// const API_BASE_URL = 'http://localhost:8081/api';
 const API_BASE_URL = '/api';
 
 export const flightsApi = {
@@ -58,34 +55,6 @@ export const flightsApi = {
     }
   },
 
-  // Получение списка регионов
-  async getRegions(): Promise<RegionData[]> {
-    try {
-      const response = await axios.get(`${API_BASE_URL}/analysis/regions`, {
-        timeout: 5000,
-      });
-
-      const validatedResponse = RegionsResponseSchema.parse(response.data);
-      
-      if (!validatedResponse) {
-        throw new Error('Ошибка получения регионов');
-      }
-
-      return validatedResponse;
-
-    } catch (error) {
-        console.log(error)
-      // Мок данные регионов
-      return [
-        { regionId: 1, name: 'Республика алтай', areaKm2: 145994.71, geometry: "111", totalFlights: 20 },
-        { regionId: 2, name: 'Псковсная область', areaKm2: 102950.18, geometry: "111", totalFlights: 50},
-        { regionId: 3, name: 'Краснодарский край', areaKm2: 106610.43, geometry: "111", totalFlights: 100 },
-        { regionId: 4, name: 'Карачаево-Черкесская Руспублика', areaKm2: 20089.7, geometry: "111", totalFlights: 15 },
-        { regionId: 5, name: 'Кабардино-Балкарская Республика', areaKm2: 17283.81, geometry: "111", totalFlights: 10 },
-      ];
-    }
-  },
-
   // Фильтрация мок данных
   filterMockFlights(flights: FlightData[], filters?: FlightsFilterData): FlightData[] {
     if (!filters) return flights;
@@ -109,32 +78,6 @@ export const flightsApi = {
 
       return true;
     });
-  },
-
-  // Валидация данных полета
-  validateFlight(flight: unknown): { isValid: boolean; errors: string[] } {
-    try {
-      FlightSchema.parse(flight);
-      return { isValid: true, errors: [] };
-    } catch (error) {
-      if (error instanceof Error) {
-        return { isValid: false, errors: [error.message] };
-      }
-      return { isValid: false, errors: ['Неизвестная ошибка валидации'] };
-    }
-  },
-
-  // Валидация фильтров
-  validateFilters(filters: unknown): { isValid: boolean; errors: string[] } {
-    try {
-      FlightsFilterSchema.parse(filters);
-      return { isValid: true, errors: [] };
-    } catch (error) {
-      if (error instanceof Error) {
-        return { isValid: false, errors: [error.message] };
-      }
-      return { isValid: false, errors: ['Неизвестная ошибка валидации фильтров'] };
-    }
   },
 
   // Мок данные для разработки
