@@ -1,9 +1,8 @@
 @use "../../styles/variables" as v;
 
 .navMenu {
-  display: grid;
+  display: flex;
   align-items: center;
-  grid-template-columns: 300px 1fr 300px;
   justify-items: center;
   gap: 20px;
 

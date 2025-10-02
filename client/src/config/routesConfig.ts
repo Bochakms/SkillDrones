@@ -9,6 +9,7 @@ import ArchivePage from '../pages/ArchivePage/ArchivePage';
 import UnauthorizedPage from '../pages/UnauthorizedPage/UnauthorizedPage';
 import AuthPage from '../pages/AuthPage/AuthPage';
 import AdminPage from '../pages/AdminPage/AdminPage';
+import UploadPage from '../pages/UploadPage/UploadPage';
 
 
 export const routeConfig: RouteConfig[] = [
@@ -16,7 +17,7 @@ export const routeConfig: RouteConfig[] = [
   {
     path: ROUTES.LOGIN,
     component: AuthPage,
-    allowedRoles: [ROLES.USER, ROLES.MANAGER, ROLES.ADMIN],
+    allowedRoles: [ROLES.OPERATOR, ROLES.ANALYST, ROLES.ADMIN],
     title: 'Вход',
     isPublic: true,
     hideFromNav: true
@@ -24,7 +25,7 @@ export const routeConfig: RouteConfig[] = [
   {
     path: ROUTES.UNAUTH,
     component: UnauthorizedPage,
-    allowedRoles: [ROLES.USER, ROLES.MANAGER, ROLES.ADMIN],
+    allowedRoles: [ROLES.OPERATOR, ROLES.ANALYST, ROLES.ADMIN],
     title: 'Доступ запрещен',
     isPublic: true,
     hideFromNav: true
@@ -34,32 +35,38 @@ export const routeConfig: RouteConfig[] = [
   {
     path: ROUTES.MAIN,
     component: MainPage,
-    allowedRoles: [ROLES.USER, ROLES.MANAGER, ROLES.ADMIN],
+    allowedRoles: [ROLES.OPERATOR, ROLES.ANALYST, ROLES.ADMIN],
     title: 'Главная',
     exact: true
   },
   {
     path: ROUTES.ACCOUNT,
     component: AccountPage,
-    allowedRoles: [ROLES.USER, ROLES.MANAGER, ROLES.ADMIN],
+    allowedRoles: [ROLES.OPERATOR, ROLES.ANALYST, ROLES.ADMIN],
     title: 'Аккаунт'
   },
   {
     path: ROUTES.ANALYTICS,
     component: AnalyticsPage,
-    allowedRoles: [ROLES.USER, ROLES.MANAGER, ROLES.ADMIN],
+    allowedRoles: [ROLES.OPERATOR, ROLES.ANALYST, ROLES.ADMIN],
     title: 'Аналитика'
   },
   {
     path: ROUTES.ARCHIVE,
     component: ArchivePage,
-    allowedRoles: [ROLES.MANAGER, ROLES.ADMIN],
+    allowedRoles: [ROLES.OPERATOR, ROLES.ADMIN],
     title: 'Архив'
+  },
+  {
+    path: ROUTES.UPLOAD,
+    component: UploadPage,
+    allowedRoles: [ROLES.OPERATOR, ROLES.ADMIN],
+    title: 'Загрузка данных'
   },
   {
     path: ROUTES.ADMIN,
     component: AdminPage,
     allowedRoles: [ROLES.ADMIN],
-    title: 'Админка'
+    title: 'Админ панель'
   }
 ];

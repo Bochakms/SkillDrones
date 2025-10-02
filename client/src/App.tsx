@@ -4,7 +4,7 @@ import { NavMenu } from "./components/NavMenu";
 import { Loader } from "./components/Loader/Loader";
 import styles from "./App.module.scss";
 import { useAppSelector } from "./app/hooks";
-import { selectAuthLoading, selectIsAuthenticated } from "./app/authSlice";
+import { selectAuthLoading } from "./app/authSlice";
 import AppRouter from "./components/AppRouter/AppRouter";
 import { getPublicRoutes } from "./utils/routeUtils";
 

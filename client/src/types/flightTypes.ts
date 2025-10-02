@@ -39,8 +39,3 @@ export interface FlightsFilter {
   endDate?: string;
   regionId?: number;
 }
-
-export interface Region {
-  id: number;
-  name: string;
-}
