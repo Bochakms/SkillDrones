@@ -62,7 +62,6 @@ const RussiaMap: React.FC<RussiaMapProps> = ({
     );
 
     polygonSeries.mapPolygons.template.setAll({
-      fill: am5.color("#67b7dc"),
       fillOpacity: 0.8,
       stroke: am5.color("#ffffff"),
       strokeWidth: 0.5,
@@ -84,11 +83,24 @@ const RussiaMap: React.FC<RussiaMapProps> = ({
       }
     });
 
-    polygonSeries.mapPolygons.template.set("tooltipText", "{name}");
+    polygonSeries.mapPolygons.template.set(
+      "tooltipHTML",
+      "<div style='font-family: Arial, sans-serif;'>" +
+        "<div style='font-weight: bold; font-size: 20px; margin-bottom: 5px;'>{name}</div>" +
+        "<div style='font-size: 14px; color: #000000;'>Кликните для получения подробной информации</div>" +
+        "</div>"
+    );
+
     polygonSeries.set(
       "tooltip",
       am5.Tooltip.new(root, {
         themeTags: ["map"],
+        background: am5.RoundedRectangle.new(root, {
+          fill: am5.color(0xffffff),
+          stroke: am5.color(0xcccccc),
+          strokeWidth: 2,
+          fillOpacity: 0.9,
+        }),
       })
     );
 
