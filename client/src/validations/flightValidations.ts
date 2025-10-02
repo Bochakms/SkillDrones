@@ -2,12 +2,12 @@ import { z } from 'zod';
 
 // Схема для полета
 export const FlightSchema = z.object({
-  flightId: z.number(),
-  droneId: z.number(),
-  rawId: z.number(),
-  flightCode: z.string(),
-  droneType: z.string(),
-  droneRegistration: z.string(),
+  flightId: z.number().nullable(),
+  droneId: z.number().nullable(),
+  rawId: z.number().nullable(),
+  flightCode: z.string().nullable(),
+  droneType: z.string().nullable(),
+  droneRegistration: z.string().nullable(),
   flightDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Неверный формат даты'),
   departureTime: z.string().regex(/^\d{2}:\d{2}$/, 'Неверный формат времени'),
   arrivalTime: z.string().regex(/^\d{2}:\d{2}$/, 'Неверный формат времени'),
@@ -18,14 +18,8 @@ export const FlightSchema = z.object({
   arrivalRegionId: z.number(),
   departureRegionName: z.string(),
   arrivalRegionName: z.string(),
-  createdAt: z.string().datetime('Неверный формат даты создания'),
-  updatedAt: z.string().datetime('Неверный формат даты обновления')
-});
-
-// Схема для региона
-export const RegionSchema = z.object({
-  id: z.number(),
-  name: z.string().min(1, 'Название региона не может быть пустым')
+  // createdAt: z.string().datetime('Неверный формат даты создания'),
+  // updatedAt: z.string().datetime('Неверный формат даты обновления')
 });
 
 // Схема для фильтров
@@ -49,22 +43,16 @@ export const FlightsFilterSchema = z.object({
 
 // Схема для ответа с полетами
 export const FlightsResponseSchema = z.object({
-  success: z.boolean(),
-  data: z.array(FlightSchema),
-  message: z.string().optional(),
-  total: z.number().optional()
-});
-
-// Схема для ответа с регионами
-export const RegionsResponseSchema = z.object({
-  success: z.boolean(),
-  data: z.array(RegionSchema),
-  message: z.string().optional()
+  content: z.array(FlightSchema),
+  currentPage: z.number().optional(),
+  pageSize: z.number().optional(),
+  totalItems: z.number().optional(),
+  totalPages: z.number().optional(),
+  hasNext: z.boolean(),
+  hasPrevious: z.boolean()
 });
 
 // Типы
 export type FlightData = z.infer<typeof FlightSchema>;
-export type RegionData = z.infer<typeof RegionSchema>;
 export type FlightsFilterData = z.infer<typeof FlightsFilterSchema>;
 export type FlightsResponseData = z.infer<typeof FlightsResponseSchema>;
-export type RegionsResponseData = z.infer<typeof RegionsResponseSchema>;

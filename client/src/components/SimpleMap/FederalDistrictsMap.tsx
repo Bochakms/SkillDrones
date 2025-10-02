@@ -16,7 +16,7 @@ interface FederalDistrict {
   color?: string;
 }
 
-export const federalDistricts: FederalDistrict[] = [
+const federalDistricts: FederalDistrict[] = [
   {
     id: "central",
     name: "Центральный федеральный округ",

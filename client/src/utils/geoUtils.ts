@@ -1,5 +1,5 @@
 // utils/geoUtilsSimple.ts
-import type { Feature, FeatureCollection, Geometry, Polygon, MultiPolygon } from "geojson";
+import type { Feature, FeatureCollection } from "geojson";
 
 // Интерфейс для федерального округа
 interface FederalDistrict {

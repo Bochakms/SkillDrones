@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import styles from "./NavMenu.module.scss";
 
 import { SpriteIcon } from "../SpriteIcon/SpriteIcon";
@@ -6,7 +6,7 @@ import { getNavRoutes } from "../../utils/routeUtils";
 
 export const NavMenu = () => {
   const userName = "Иванов Иван";
-  const userRole = "user";
+  const userRole = "admin";
   // const user = useAppSelector(selectUser);
   // const userRole = user?.role || "guest";
 
@@ -15,6 +15,14 @@ export const NavMenu = () => {
   return (
     <nav className={styles.navMenu}>
       <div className={styles.navMenu__leftWrapper}>
+        <Link to={"/"}>
+          <SpriteIcon
+            className={styles.navMenu__logo}
+            name="logo-skilldrones-secondary"
+            width={64}
+            height={64}
+          />
+        </Link>
         {navRoutes.map((route) => (
           <NavLink
             key={route.path}
@@ -29,12 +37,6 @@ export const NavMenu = () => {
           </NavLink>
         ))}
       </div>
-      <SpriteIcon
-        className={styles.navMenu__logo}
-        name="logo-skilldrones"
-        width={160}
-        height={60}
-      />
       <div className={styles.navMenu__rightWrapper}>
         <div className={styles.navMenu__iconWrapper}>
           <SpriteIcon name="icon-bell" width={32} height={32} />

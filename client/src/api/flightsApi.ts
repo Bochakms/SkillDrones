@@ -1,14 +1,13 @@
 // api/flightsApi.ts
 import axios from 'axios';
 import { 
-  FlightsResponseSchema, 
-  RegionsResponseSchema,
+  FlightsResponseSchema,
   FlightsFilterSchema,
   type FlightData,
   type FlightsFilterData,
-  type RegionData,
   FlightSchema
 } from '../validations/flightValidations';
+import { RegionsResponseSchema, type RegionData } from '../validations/regionValidations';
 
 // const API_BASE_URL = 'http://localhost:8081/api';
 const API_BASE_URL = '/api';
@@ -43,11 +42,11 @@ export const flightsApi = {
 
       const validatedResponse = FlightsResponseSchema.parse(response.data);
       
-      if (!validatedResponse.success) {
-        throw new Error(validatedResponse.message || 'Ошибка получения данных');
+      if (!validatedResponse) {
+        throw new Error('Ошибка получения данных');
       }
 
-      return validatedResponse.data;
+      return validatedResponse.content;
 
     } catch (error) {
         console.log(error)
@@ -68,21 +67,21 @@ export const flightsApi = {
 
       const validatedResponse = RegionsResponseSchema.parse(response.data);
       
-      if (!validatedResponse.success) {
-        throw new Error(validatedResponse.message || 'Ошибка получения регионов');
+      if (!validatedResponse) {
+        throw new Error('Ошибка получения регионов');
       }
 
-      return validatedResponse.data;
+      return validatedResponse;
 
     } catch (error) {
         console.log(error)
       // Мок данные регионов
       return [
-        { id: 1, name: 'Центральный' },
-        { id: 2, name: 'Северный' },
-        { id: 3, name: 'Южный' },
-        { id: 4, name: 'Восточный' },
-        { id: 5, name: 'Западный' },
+        { regionId: 1, name: 'Республика алтай', areaKm2: 145994.71, geometry: "111", totalFlights: 20 },
+        { regionId: 2, name: 'Псковсная область', areaKm2: 102950.18, geometry: "111", totalFlights: 50},
+        { regionId: 3, name: 'Краснодарский край', areaKm2: 106610.43, geometry: "111", totalFlights: 100 },
+        { regionId: 4, name: 'Карачаево-Черкесская Руспублика', areaKm2: 20089.7, geometry: "111", totalFlights: 15 },
+        { regionId: 5, name: 'Кабардино-Балкарская Республика', areaKm2: 17283.81, geometry: "111", totalFlights: 10 },
       ];
     }
   },
@@ -160,8 +159,6 @@ export const flightsApi = {
         arrivalRegionId: 2,
         departureRegionName: "Центральный",
         arrivalRegionName: "Северный",
-        createdAt: "2024-01-15T11:45:00.000Z",
-        updatedAt: "2024-01-15T11:45:00.000Z"
       },
       {
         flightId: 2,
@@ -180,8 +177,6 @@ export const flightsApi = {
         arrivalRegionId: 3,
         departureRegionName: "Центральный",
         arrivalRegionName: "Южный",
-        createdAt: "2024-01-16T12:30:00.000Z",
-        updatedAt: "2024-01-16T12:30:00.000Z"
       },
       {
         flightId: 3,
@@ -200,8 +195,6 @@ export const flightsApi = {
         arrivalRegionId: 2,
         departureRegionName: "Северный",
         arrivalRegionName: "Северный",
-        createdAt: "2024-01-20T16:20:00.000Z",
-        updatedAt: "2024-01-20T16:20:00.000Z"
       },
       {
         flightId: 4,
@@ -220,8 +213,6 @@ export const flightsApi = {
         arrivalRegionId: 4,
         departureRegionName: "Южный",
         arrivalRegionName: "Восточный",
-        createdAt: "2024-01-25T13:30:00.000Z",
-        updatedAt: "2024-01-25T13:30:00.000Z"
       }
     ];
 

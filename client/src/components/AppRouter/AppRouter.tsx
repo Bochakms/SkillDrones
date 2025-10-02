@@ -7,7 +7,7 @@ import RegionPage from "../../pages/RegionPage/RegionPage";
 function AppRouter() {
   //   const user = useAppSelector(selectUser);
   //   const userRole = user?.role || "guest";
-  const userRole = "user";
+  const userRole = "admin";
 
   const protectedRoutes = getProtectedRoutes(userRole);
 

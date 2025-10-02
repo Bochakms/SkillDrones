@@ -5,5 +5,6 @@ export const ROUTES = {
   ACCOUNT: '/account',
   ANALYTICS: '/analytics',
   ARCHIVE: '/archive',
+  UPLOAD: '/upload',
   ADMIN: '/admin',
 };
