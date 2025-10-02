@@ -1,10 +1,10 @@
 export interface Flight {
-  flightId: number;
-  droneId: number;
-  rawId: number;
-  flightCode: string;
-  droneType: string;
-  droneRegistration: string;
+  flightId: number | null;
+  droneId: number | null;
+  rawId: number | null;
+  flightCode: string | null;
+  droneType: string | null;
+  droneRegistration: string | null;
   flightDate: string;
   departureTime: string;
   arrivalTime: string;
@@ -15,8 +15,6 @@ export interface Flight {
   arrivalRegionId: number;
   departureRegionName: string;
   arrivalRegionName: string;
-  createdAt: string;
-  updatedAt: string;
 }
 
 export interface FlightsResponse {
