@@ -1,7 +1,8 @@
-// hooks/useFlights.ts
+
 import { useState, useCallback } from 'react';
 import { flightsApi } from '../api/flightsApi';
-import type { FlightsState, FlightsFilter, Region } from '../types/flightTypes';
+import type { FlightsState, FlightsFilter } from '../types/flightTypes';
+import type { Region } from '../types/regionTypes';
 
 export const useFlights = () => {
   const [state, setState] = useState<FlightsState>({

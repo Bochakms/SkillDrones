@@ -18,8 +18,6 @@ export const FlightSchema = z.object({
   arrivalRegionId: z.number(),
   departureRegionName: z.string(),
   arrivalRegionName: z.string(),
-  // createdAt: z.string().datetime('Неверный формат даты создания'),
-  // updatedAt: z.string().datetime('Неверный формат даты обновления')
 });
 
 // Схема для фильтров

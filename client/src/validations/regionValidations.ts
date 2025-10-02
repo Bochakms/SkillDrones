@@ -1,13 +1,5 @@
 import z from "zod";
 
-export interface Region {
-  regionId: number;
-  name: string;
-  areaKm2: number;
-  geometry: string;
-  totalFlights: number;
-}
-
 // Схема для региона
 export const RegionSchema = z.object({
   regionId: z.number(),

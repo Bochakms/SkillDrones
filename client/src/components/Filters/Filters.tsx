@@ -1,8 +1,9 @@
 // components/Filters/Filters.tsx
 import React from "react";
 import { Button } from "../Button/Button";
-import type { FlightsFilter, Region } from "../../types/flightTypes";
+import type { FlightsFilter } from "../../types/flightTypes";
 import styles from "./Filters.module.scss";
+import type { Region } from "../../types/regionTypes";
 
 interface FiltersProps {
   filters: FlightsFilter;
@@ -94,7 +95,7 @@ export const Filters: React.FC<FiltersProps> = ({
           >
             <option value="">Все регионы</option>
             {regions.map((region) => (
-              <option key={region.id} value={region.id}>
+              <option key={region.regionId} value={region.regionId}>
                 {region.name}
               </option>
             ))}
@@ -125,7 +126,9 @@ export const Filters: React.FC<FiltersProps> = ({
           {filters.startDate && ` С ${filters.startDate}`}
           {filters.endDate && ` По ${filters.endDate}`}
           {filters.regionId &&
-            ` Регион: ${regions.find((r) => r.id === filters.regionId)?.name}`}
+            ` Регион: ${
+              regions.find((r) => r.regionId === filters.regionId)?.name
+            }`}
         </div>
       )}
     </div>
