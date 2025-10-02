@@ -123,7 +123,7 @@ const FetchFlightsData: React.FC<FetchFlightsDataProps> = ({
           Показано {flights.length} полетов
           {filters.regionId &&
             ` для региона: ${
-              regions.find((r) => r.id === filters.regionId)?.name
+              regions.find((r) => r.regionId === filters.regionId)?.name
             }`}
           {filters.startDate && ` с ${filters.startDate}`}
           {filters.endDate && ` по ${filters.endDate}`}
